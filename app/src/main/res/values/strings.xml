@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EasyBooking</string>
+    <string name="nav_hotel_label">Hotel</string>
+    <string name="nav_car_label">Car</string>
+    <string name="nav_transit_label">Transit</string>
+    <string name="nav_booking_label">Booking</string>
+    <string name="nav_profile_label">Profile</string>
+</resources>
