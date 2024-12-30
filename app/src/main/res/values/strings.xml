@@ -5,4 +5,10 @@
     <string name="nav_transit_label">Transit</string>
     <string name="nav_booking_label">Booking</string>
     <string name="nav_profile_label">Profile</string>
+    <string name="placeholder_username">John Doe</string>
+    <string name="placeholder_email">john.mclean@examplepetstore.com</string>
+    <string name="placeholder_phone">0412345678</string>
+    <string name="change_password"><u>Change password</u></string>
+    <string name="log_out">Log Out</string>
+    <string name="login">Login</string>
 </resources>

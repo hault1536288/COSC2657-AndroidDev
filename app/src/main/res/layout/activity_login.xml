@@ -55,11 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
-            android:backgroundTint="@color/onyx"
             android:text="Login"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:cornerRadius="10dp" />
+            style="@style/OnyxButtonStyle" />
 
     </LinearLayout>
 
