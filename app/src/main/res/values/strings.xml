@@ -11,4 +11,7 @@
     <string name="change_password"><u>Change password</u></string>
     <string name="log_out">Log Out</string>
     <string name="login">Login</string>
+    <string name="sample_price_per_day"><b>$300/</b>day</string>
+    <string name="sample_price_per_hour"><b>$30/</b>hour</string>
+    <string name="sample_car_brand"><b>Brand: </b>Toyota</string>
 </resources>
