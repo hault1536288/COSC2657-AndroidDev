@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="20dp"
+        android:orientation="vertical"
         android:paddingTop="50dp">
 
         <LinearLayout
@@ -71,6 +72,12 @@
                 android:textStyle="bold"
                 app:cornerRadius="8dp" />
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hotelsRecyclerView"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </FrameLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/anti_flash_white"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/anti_flash_white"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/hotelImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_hotel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33" />
+
+        <TextView
+            android:id="@+id/hotelNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="Hotel Name"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/hotelLocationTextView"/>
+
+        <TextView
+            android:id="@+id/hotelRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/wheat"
+            android:paddingHorizontal="10dp"
+            android:text="8.5"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ic_location"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/hotelNameTextView" />
+
+        <TextView
+            android:id="@+id/hotelLocationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:text="Sample location"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/ic_location"
+            app:layout_constraintTop_toBottomOf="@+id/hotelNameTextView" />
+
+        <ImageView
+            android:id="@+id/ic_price"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_price"
+            app:layout_constraintStart_toEndOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/ic_location" />
+
+        <TextView
+            android:id="@+id/hotelPricePerNightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:text="$300/night"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/ic_price"
+            app:layout_constraintTop_toBottomOf="@+id/hotelLocationTextView" />
+
+        <TextView
+            android:id="@+id/hotelPricePerHourTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:text="$30/hour"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/ic_price"
+            app:layout_constraintTop_toBottomOf="@+id/hotelPricePerNightTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
