@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,116 +7,190 @@
     android:background="@color/white"
     tools:context=".activities.HotelDetailActivity">
 
-    <ImageView
-        android:id="@+id/hotelDetailImageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/wheat"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_hotel"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
-
-    <LinearLayout
-        android:id="@+id/hotelDetailNameAndRatingLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/hotelDetailDescriptionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline">
-
-        <TextView
-            android:id="@+id/hotelDetailNameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Hotel name"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/hotelDetailRatingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/wheat"
-            android:paddingHorizontal="10dp"
-            android:text="8.5"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/hotelDetailDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:text="Sample description Sample description Sample description Sample description Sample description"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hotelDetailNameAndRatingLayout" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/hotelDetailSelectionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@color/anti_flash_white"
-        android:padding="16dp"
-        app:cornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hotelDetailDescriptionTextView">
+        android:background="@color/white"
+        android:paddingBottom="16dp"
+        tools:context=".activities.HotelDetailActivity">
 
         <ImageView
-            android:id="@+id/hotelDetailLocationIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_location"
+            android:id="@+id/hotelDetailImageView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@color/wheat"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_hotel"
+            app:layout_constraintBottom_toTopOf="@+id/hotelDetailNameAndRatingLayout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/hotelDetailNameAndRatingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/hotelDetailDescriptionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotelDetailImageView">
+
+            <TextView
+                android:id="@+id/hotelDetailNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hotel name"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hotelDetailRatingTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/wheat"
+                android:paddingHorizontal="10dp"
+                android:text="8.5"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/hotelDetailLocationTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/hotelDetailDescriptionTextView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16sp"
-            android:text="Sample location"
+            android:layout_marginHorizontal="16dp"
+            android:text="Sample description Sample description Sample description Sample description Sample description"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@id/hotelDetailLocationIcon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/hotelDetailBedIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginVertical="16sp"
-            android:src="@drawable/ic_bed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hotelDetailLocationIcon" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/hotelDetailBedIcon"
-            android:hint="Select type"
-            app:layout_constraintTop_toBottomOf="@id/hotelDetailLocationTextView"
-            android:background="@drawable/bordered_input_field"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotelDetailNameAndRatingLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/hotelDetailSelectionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/anti_flash_white"
+            android:padding="16dp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hotelDetailDescriptionTextView">
+
+            <ImageView
+                android:id="@+id/hotelDetailLocationIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_location"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/hotelDetailLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16sp"
+                android:text="Sample location"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/hotelDetailLocationIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/hotelDetailBedIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginVertical="16sp"
+                android:src="@drawable/ic_bed"
+                app:layout_constraintEnd_toStartOf="@id/hotelDetailTypeEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hotelDetailLocationIcon" />
+
+            <EditText
+                android:id="@+id/hotelDetailTypeEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:layout_marginTop="16sp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="Select type"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/hotelDetailBedIcon"
+                app:layout_constraintTop_toBottomOf="@id/hotelDetailLocationTextView" />
+
+            <TextView
+                android:id="@+id/checkInLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:text="Check-in date"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hotelDetailTypeEditText" />
+
+            <EditText
+                android:id="@+id/hotelDetailCheckInEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="Select date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkInLabel" />
+
+            <TextView
+                android:id="@+id/checkOutLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16sp"
+                android:text="Check-out date"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/hotelDetailCheckInEditText" />
+
+            <EditText
+                android:id="@+id/hotelDetailCheckOutEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="Select date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkOutLabel" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hotelDetailCheckOutEditText">
+
+                <TextView
+                    android:id="@+id/hotelDetailTotalPrice"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total: $200"
+                    android:textSize="20sp" />
+
+                <Button
+                    style="@style/OnyxButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add to booking" />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
