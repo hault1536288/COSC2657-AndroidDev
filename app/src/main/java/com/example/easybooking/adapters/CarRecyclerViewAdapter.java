@@ -1,6 +1,7 @@
 package com.example.easybooking.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.easybooking.R;
+import com.example.easybooking.activities.CarDetailActivity;
 import com.example.easybooking.models.Car;
 
 import java.util.ArrayList;
@@ -48,6 +50,20 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
         holder.carBrandTextView.setText("Brand: " + carArrayList.get(position).getBrand());
         holder.pricePerDayTextView.setText("$" + carArrayList.get(position).getPricePerDay().toString() + "/day");
         holder.pricePerHourTextView.setText("$" + carArrayList.get(position).getPricePerHour().toString() + "/hour");
+
+        // Set up button click listener
+        holder.viewDetailsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, CarDetailActivity.class);
+
+            // Pass data to the CarDetailActivity
+            intent.putExtra("CAR_IMAGE_URL", carArrayList.get(position).getCarImageUrl());
+            intent.putExtra("CAR_NAME", carArrayList.get(position).getName());
+            intent.putExtra("CAR_BRAND", carArrayList.get(position).getBrand());
+            intent.putExtra("CAR_MODEL", carArrayList.get(position).getModel());
+            intent.putExtra("CAR_DESCRIPTION", carArrayList.get(position).getDescription());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override
