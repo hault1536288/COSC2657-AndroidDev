@@ -11,10 +11,10 @@
         android:icon="@drawable/ic_car"
         android:title="@string/nav_car_label"/>
     <item
-        android:id="@+id/transit"
+        android:id="@+id/transport"
         android:enabled="true"
-        android:icon="@drawable/ic_transit"
-        android:title="@string/nav_transit_label"/>
+        android:icon="@drawable/ic_transport"
+        android:title="@string/nav_transport_label"/>
     <item
         android:id="@+id/booking"
         android:enabled="true"
