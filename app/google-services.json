@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1021672117854",
+    "firebase_url": "https://easybooking-59b44-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "easybooking-59b44",
+    "storage_bucket": "easybooking-59b44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021672117854:android:38c41ef8b66c9f12a8c6cf",
+        "android_client_info": {
+          "package_name": "com.example.easybooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021672117854-glfrm1nvgb0jic53j7msa6d4govb9m94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlXPVyCiIX1-tVy6H4_m6dexqx2-g0Oj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021672117854-glfrm1nvgb0jic53j7msa6d4govb9m94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
