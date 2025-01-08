@@ -22,7 +22,7 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText emailEditText, passwordEditText, usernameEditText, phoneEditText;
+    private EditText emailEditText, passwordEditText, usernameEditText, phoneEditText, firstNameEditText, lastNameEditText, dateOfBirthEditText;
     private Button signUpButton;
     private TextView loginTextView;
 
@@ -39,6 +39,9 @@ public class SignUpActivity extends AppCompatActivity {
         phoneEditText = findViewById(R.id.phoneEditText);
         signUpButton = findViewById(R.id.signUpButton);
         loginTextView = findViewById(R.id.loginTextView);
+        firstNameEditText = findViewById(R.id.firstNameEditText);
+        lastNameEditText = findViewById(R.id.lastNameEditText);
+        dateOfBirthEditText = findViewById(R.id.dateOfBirthEditText);
 
         signUpButton.setOnClickListener(v -> signUpUser());
 
@@ -54,6 +57,9 @@ public class SignUpActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
         String username = usernameEditText.getText().toString();
         String phone = phoneEditText.getText().toString();
+        String firstName = firstNameEditText.getText().toString();
+        String lastName = lastNameEditText.getText().toString();
+        String dateOfBirth = dateOfBirthEditText.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, task -> {
@@ -68,6 +74,9 @@ public class SignUpActivity extends AppCompatActivity {
                         userData.put("email", email);
                         userData.put("username", username);
                         userData.put("phone", phone);
+                        userData.put("firstName", firstName);
+                        userData.put("lastName", lastName);
+                        userData.put("dateOfBirth", dateOfBirth);
 
                         // Store user information in Firestore
                         db.collection("users").document(user.getUid()).set(userData)

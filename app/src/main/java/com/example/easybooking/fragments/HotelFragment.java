@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.easybooking.R;
 import com.example.easybooking.activities.HotelDetailActivity;
@@ -40,6 +41,17 @@ public class HotelFragment extends Fragment implements RecyclerViewInterface {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        EditText locationEditText = view.findViewById(R.id.locationEditText);
+        EditText dateEditText = view.findViewById(R.id.dateEditText);
+        EditText typeEditText = view.findViewById(R.id.typeEditText);
+
+        locationEditText.clearFocus();
+        dateEditText.clearFocus();
+        typeEditText.clearFocus();
+
+        view.findViewById(R.id.hotelsRecyclerView).requestFocus();
+
         // get the recycler view from the layout
         hotelsRecyclerView = view.findViewById(R.id.hotelsRecyclerView);
         // get the hotel data from the sample data
