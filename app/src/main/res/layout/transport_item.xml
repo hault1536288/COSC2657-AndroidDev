@@ -1,19 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@color/anti_flash_white"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/anti_flash_white"
-        android:padding="8dp">
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/typeIconImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_plane"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/typeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Flight"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/typeIconImageView"
+            app:layout_constraintTop_toTopOf="@+id/typeIconImageView" />
+
+        <LinearLayout
+            android:id="@+id/departureLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/typeIconImageView">
+
+            <TextView
+                android:id="@+id/departureLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hanoi"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/departureTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/departureDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21/12/2024"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/travelTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="06h00m"
+            app:layout_constraintBottom_toTopOf="@+id/travelHorizontalLine"
+            app:layout_constraintEnd_toStartOf="@+id/arrivalLayout"
+            app:layout_constraintStart_toEndOf="@+id/departureLayout" />
+
+        <View
+            android:id="@+id/travelHorizontalLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/arrivalLayout"
+            app:layout_constraintEnd_toStartOf="@+id/arrivalLayout"
+            app:layout_constraintStart_toEndOf="@+id/departureLayout"
+            app:layout_constraintTop_toTopOf="@id/arrivalLayout" />
+
+        <LinearLayout
+            android:id="@+id/arrivalLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/typeIconImageView">
+
+            <TextView
+                android:id="@+id/arrivalLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HCM"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/arrivalTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:30"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/arrivalDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22/12/2024"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/horizontalLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray85"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/arrivalLayout" />
+
+        <TextView
+            android:id="@+id/brandTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Vietnam Airlines"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontalLine" />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$200"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/seatTextView"
+            app:layout_constraintTop_toBottomOf="@id/horizontalLine" />
+
+        <TextView
+            android:id="@+id/seatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="/seat"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/horizontalLine" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
