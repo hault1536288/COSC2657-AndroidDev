@@ -14,4 +14,10 @@
     <string name="sample_price_per_day"><b>$300/</b>day</string>
     <string name="sample_price_per_hour"><b>$30/</b>hour</string>
     <string name="sample_car_brand"><b>Brand: </b>Toyota</string>
+    <string name="_84_123456789">+84 123456789</string>
+    <string name="phone">Phone</string>
+    <string name="save">Save</string>
+    <string name="notification">Notification</string>
+    <string name="fingerprint_settings">Fingerprint Settings</string>
+    <string name="logout">Logout</string>
 </resources>
