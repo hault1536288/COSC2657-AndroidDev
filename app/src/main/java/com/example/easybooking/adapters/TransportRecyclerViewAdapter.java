@@ -18,12 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class TransportRecyclerViewAdapter extends RecyclerView.Adapter<TransportRecyclerViewAdapter.TransportViewHolder> {
+    private final RecyclerViewInterface recyclerViewInterface;
     Context context;
     ArrayList<Transport> transportArrayList;
 
-    public TransportRecyclerViewAdapter(Context context, ArrayList<Transport> transportArrayList) {
+    public TransportRecyclerViewAdapter(Context context, ArrayList<Transport> transportArrayList, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.transportArrayList = transportArrayList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -32,7 +34,7 @@ public class TransportRecyclerViewAdapter extends RecyclerView.Adapter<Transport
         // This is where you inflate the layout for each item in the RecyclerView
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.transport_item, parent, false);
-        return new TransportRecyclerViewAdapter.TransportViewHolder(view);
+        return new TransportRecyclerViewAdapter.TransportViewHolder(view, recyclerViewInterface);
     }
 
     @Override
@@ -87,7 +89,7 @@ public class TransportRecyclerViewAdapter extends RecyclerView.Adapter<Transport
         holder.travelTimeTextView.setText(travelTime);
 
         holder.brandTextView.setText(transport.getBrand());
-        holder.priceTextView.setText("$" + transport.getPrice().toString());
+        holder.priceTextView.setText("$" + transport.getPrice());
 
     }
 
@@ -104,7 +106,7 @@ public class TransportRecyclerViewAdapter extends RecyclerView.Adapter<Transport
         TextView arrivalLocationTextView, arrivalTimeTextView, arrivalDateTextView;
         TextView travelTimeTextView, brandTextView, priceTextView;
 
-        public TransportViewHolder(@NonNull View itemView) {
+        public TransportViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             typeIconImageView = itemView.findViewById(R.id.typeIconImageView);
@@ -118,6 +120,22 @@ public class TransportRecyclerViewAdapter extends RecyclerView.Adapter<Transport
             travelTimeTextView = itemView.findViewById(R.id.travelTimeTextView);
             brandTextView = itemView.findViewById(R.id.brandTextView);
             priceTextView = itemView.findViewById(R.id.priceTextView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                // This method is called when an item in the RecyclerView is clicked
+                @Override
+                public void onClick(View view) {
+                    // Get the position of the item in the RecyclerView
+                    if (recyclerViewInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            // Call the onItemClick method of the RecyclerViewInterface
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }
