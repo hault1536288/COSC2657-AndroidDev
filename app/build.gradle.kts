@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(libs.glide)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.common)
     annotationProcessor(libs.compiler)
     implementation(libs.material)
     implementation(libs.appcompat)

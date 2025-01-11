@@ -47,8 +47,8 @@ public class HotelRecyclerViewAdapter extends RecyclerView.Adapter<HotelRecycler
         holder.hotelNameTextView.setText(hotelArrayList.get(position).getName());
         holder.hotelRatingTextView.setText(String.valueOf(hotelArrayList.get(position).getRating()));
         holder.hotelLocationTextView.setText(hotelArrayList.get(position).getLocation());
-        holder.hotelPricePerNightTextView.setText("$" + hotelArrayList.get(position).getPricePerNight().toString() + "/night");
-        holder.hotelPricePerHourTextView.setText("$" + hotelArrayList.get(position).getPricePerHour().toString() + "/hour");
+        holder.hotelPricePerNightTextView.setText("$" + hotelArrayList.get(position).getPricePerNight() + "/night");
+        holder.hotelPricePerHourTextView.setText("$" + hotelArrayList.get(position).getPricePerHour() + "/hour");
     }
 
     @Override

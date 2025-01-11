@@ -48,8 +48,8 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
                 .into(holder.carImageView);
         holder.carNameTextView.setText(carArrayList.get(position).getName());
         holder.carBrandTextView.setText("Brand: " + carArrayList.get(position).getBrand());
-        holder.pricePerDayTextView.setText("$" + carArrayList.get(position).getPricePerDay().toString() + "/day");
-        holder.pricePerHourTextView.setText("$" + carArrayList.get(position).getPricePerHour().toString() + "/hour");
+        holder.pricePerDayTextView.setText("$" + carArrayList.get(position).getPricePerDay() + "/day");
+        holder.pricePerHourTextView.setText("$" + carArrayList.get(position).getPricePerHour() + "/hour");
 
         // Set up button click listener
         holder.viewDetailsButton.setOnClickListener(v -> {
