@@ -7,7 +7,7 @@ public class Transport {
     private String transportId;
     private String type;
     private String brand;
-    private BigDecimal price;
+    private double price;
     private Date departureDate;
     private Date arrivalDate;
     private String departureLocation;
@@ -17,7 +17,7 @@ public class Transport {
     private double arrivalLatitude;
     private double arrivalLongitude;
     public Transport() {}
-    public Transport(String transportId, String type, String brand, BigDecimal price, Date departureDate,
+    public Transport(String transportId, String type, String brand, double price, Date departureDate,
                      Date arrivalDate, String departureLocation, String arrivalLocation, double departureLatitude,
                      double departureLongitude, double arrivalLatitude, double arrivalLongitude) {
         this.transportId = transportId;
@@ -46,7 +46,7 @@ public class Transport {
         return brand;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 

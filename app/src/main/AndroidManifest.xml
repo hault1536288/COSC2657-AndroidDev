@@ -15,6 +15,9 @@
         android:theme="@style/Theme.EasyBooking"
         tools:targetApi="31">
         <activity
+            android:name=".activities.TransportTicketDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CarDetailActivity"
             android:exported="false" />
         <activity
