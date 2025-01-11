@@ -6,62 +6,70 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.easybooking.R;
 
 public class ProfileFragment extends Fragment {
 
-    private LinearLayout personalInfoLayout;
-    private EditText emailEditText;
-    private EditText phoneEditText;
-
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
+    private EditText emailEditText, phoneEditText;
+    private ImageView emailEditButton, phoneEditButton;
+    private TextView changePasswordTextView;
+    private Button logoutButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Initialize UI Components
-        Button personalInfoButton = view.findViewById(R.id.personalInfoButton);
-        personalInfoLayout = view.findViewById(R.id.personalInfoLayout);
+        // Initialize UI components
         emailEditText = view.findViewById(R.id.emailEditText);
         phoneEditText = view.findViewById(R.id.phoneEditText);
-        Button saveButton = view.findViewById(R.id.saveButton);
+        emailEditButton = view.findViewById(R.id.emailEditButton);
+        phoneEditButton = view.findViewById(R.id.phoneEditButton);
+        changePasswordTextView = view.findViewById(R.id.changePasswordTextView);
+        logoutButton = view.findViewById(R.id.logoutButton);
 
-        // Show/Hide Personal Information Section
-        personalInfoButton.setOnClickListener(v -> {
-            if (personalInfoLayout.getVisibility() == View.GONE) {
-                personalInfoLayout.setVisibility(View.VISIBLE);
-            } else {
-                personalInfoLayout.setVisibility(View.GONE);
-            }
+        // Handle email edit button click
+        emailEditButton.setOnClickListener(v -> toggleEditMode(emailEditText, emailEditButton));
+
+        // Handle phone edit button click
+        phoneEditButton.setOnClickListener(v -> toggleEditMode(phoneEditText, phoneEditButton));
+
+        // Handle Change Password click
+        changePasswordTextView.setOnClickListener(v -> {
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, new ChangePasswordFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
-        // Save Button Click Listener
-        saveButton.setOnClickListener(v -> {
-            // Get updated information
-            String updatedEmail = emailEditText.getText().toString();
-            String updatedPhone = phoneEditText.getText().toString();
-
-            // For now, just print the updated information
-            // You can save it to SharedPreferences or a database
-            System.out.println("Updated Email: " + updatedEmail);
-            System.out.println("Updated Phone: " + updatedPhone);
-
-            // Hide the Personal Information section
-            personalInfoLayout.setVisibility(View.GONE);
+        // Handle logout button click
+        logoutButton.setOnClickListener(v -> {
+            // Handle logout functionality
+            Toast.makeText(getContext(), "Logged out", Toast.LENGTH_SHORT).show();
         });
+
+        return view;
+    }
+
+    // Function to toggle edit mode
+    private void toggleEditMode(EditText editText, ImageView editButton) {
+        if (editText.isEnabled()) {
+            // Save the new value
+            editText.setEnabled(false);
+            editButton.setImageResource(R.drawable.ic_edit); // Change icon back to Edit
+            Toast.makeText(getContext(), "Information saved", Toast.LENGTH_SHORT).show();
+        } else {
+            // Enable the EditText for editing
+            editText.setEnabled(true);
+            editButton.setImageResource(R.drawable.ic_save); // Change icon to Save
+        }
     }
 }
