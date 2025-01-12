@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation(libs.glide)
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     annotationProcessor(libs.compiler)
     implementation(libs.material)
     implementation(libs.appcompat)
