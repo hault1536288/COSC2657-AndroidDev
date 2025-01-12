@@ -1,14 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.CreateHotelFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="create hotel" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <!-- Header -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/onyx"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create a New Hotel"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Image Upload Section -->
+            <ImageView
+                android:id="@+id/hotelImageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:background="@android:color/darker_gray"
+                android:padding="20dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_add_a_photo_24" />
+
+            <Button
+                android:id="@+id/uploadImageButton"
+                style="@style/OnyxButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="+ Upload Image" />
+
+            <!-- Hotel Name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hotel Name"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., The Grand Plaza" />
+
+            <!-- Description -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., A luxury hotel in the city center" />
+
+            <!-- Location -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/locationEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., New York, USA" />
+
+            <!-- Latitude -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Latitude"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/latitudeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., 40.7128" />
+
+            <!-- Longitude -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Longitude"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/longitudeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., -74.0060" />
+
+            <!-- Price Per Night -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Price Per Night"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/pricePerNightEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., $200"
+                android:inputType="numberDecimal" />
+
+            <!-- Price Per Hour -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Price Per Hour"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp" />
+
+            <EditText
+                android:id="@+id/pricePerHourEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:hint="e.g., $20"
+                android:inputType="numberDecimal" />
+
+            <!-- Create Hotel Button -->
+            <Button
+                android:id="@+id/createHotelButton"
+                style="@style/OnyxButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="+ Create Hotel" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
