@@ -25,12 +25,16 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import android.text.TextUtils;
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 9001;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private GoogleSignInClient mGoogleSignInClient;
     private EditText emailEditText, passwordEditText;
     private Button loginButton, googleSignInButton;
@@ -44,12 +48,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Check if user is already logged in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             // User is logged in, navigate to the appropriate activity
-            navigateToAppropriateActivity(currentUser.getEmail());
+            fetchUserRoleAndNavigate(currentUser.getUid());
         }
 
         // Configure Google Sign-In
@@ -101,15 +106,15 @@ public class LoginActivity extends AppCompatActivity {
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    navigateToAppropriateActivity(user.getEmail());
-                } else {
-                    Log.w("LoginActivity", "signInWithCredential:failure", task.getException());
-                    Toast.makeText(LoginActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
-                }
-            });
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        navigateToAppropriateActivity(user.getEmail());
+                    } else {
+                        Log.w("LoginActivity", "signInWithCredential:failure", task.getException());
+                        Toast.makeText(LoginActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void navigateToAppropriateActivity(String email) {
@@ -123,6 +128,37 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
         finish(); // Close LoginActivity
+    }
+
+    // This function will fetch the user's role from Firestore and navigate to the appropriate activity
+    private void fetchUserRoleAndNavigate(String userId) {
+        db.collection("users").document(userId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        DocumentSnapshot document = task.getResult();
+                        String role = document.getString("role");
+
+                        if ("admin".equals(role)) {
+                            navigateToAdminActivity();
+                        } else {
+                            navigateToMainActivity();
+                        }
+                    } else {
+                        Toast.makeText(this, "Failed to fetch user role.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void navigateToAdminActivity() {
+        Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void navigateToMainActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void loginUser() {
@@ -140,15 +176,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    navigateToAppropriateActivity(email);
-                } else {
-                    String errorMessage = task.getException() != null ? task.getException().getMessage() : "Login Failed";
-                    Toast.makeText(LoginActivity.this, "Login Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        assert user != null;
+                        fetchUserRoleAndNavigate(user.getUid());
+                    } else {
+                        String errorMessage = task.getException() != null ? task.getException().getMessage() : "Login Failed";
+                        Toast.makeText(LoginActivity.this, "Login Failed: " + errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override

@@ -14,4 +14,6 @@
     <string name="sample_price_per_day"><b>$300/</b>day</string>
     <string name="sample_price_per_hour"><b>$30/</b>hour</string>
     <string name="sample_car_brand"><b>Brand: </b>Toyota</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
