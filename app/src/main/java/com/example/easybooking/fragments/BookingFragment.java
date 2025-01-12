@@ -28,28 +28,25 @@ public class BookingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_booking, container, false);
 
-        // Setup Current Booking RecyclerView
         RecyclerView currentBookingRecyclerView = view.findViewById(R.id.currentBookingRecyclerView);
-        currentBookingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Setup History RecyclerView
         RecyclerView historyRecyclerView = view.findViewById(R.id.historyRecyclerView);
+
+        currentBookingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         historyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Sample data for Current Booking
+        // Sample data for current bookings
         List<Booking> currentBookings = new ArrayList<>();
-        currentBookings.add(new Booking("#123456", "11/20/2024 → 11/23/2024", "Hotel Name 2", "Location A → Location B", "$450 USD", "Pending", true));
+        currentBookings.add(new Booking("#123456", "11/20/2024 → 11/23/2024", "Hotel Name 2", "Location A → Location B", "N/A", "$450 USD", "Pending", true));
 
-        // Sample data for History
+        // Sample data for history
         List<Booking> historyBookings = new ArrayList<>();
-        historyBookings.add(new Booking("#123457", "11/25/2024 → 11/28/2024", "Hotel Name", "Location B → Location C", "$350 USD", "Success", false));
-        historyBookings.add(new Booking("#123458", "10/20/2024 → 10/23/2024", "Hotel Name 3", "Location C → Location D", "$500 USD", "Success", false));
+        historyBookings.add(new Booking("#123457", "11/25/2024 → 11/28/2024", "Hotel Name 3", "Location C → Location D", "Car Name", "$350 USD", "Success", false));
+        historyBookings.add(new Booking("#123458", "10/20/2024 → 10/23/2024", "Hotel Name 4", "Location E → Location F", null, "$500 USD", "Success", false));
 
-        // Set adapters
         BookingAdapter currentAdapter = new BookingAdapter(currentBookings, getContext());
-        currentBookingRecyclerView.setAdapter(currentAdapter);
-
         BookingAdapter historyAdapter = new BookingAdapter(historyBookings, getContext());
+
+        currentBookingRecyclerView.setAdapter(currentAdapter);
         historyRecyclerView.setAdapter(historyAdapter);
 
         return view;

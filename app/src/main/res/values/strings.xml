@@ -37,6 +37,12 @@
     <string name="location">📍 %s</string>
     <string name="total_amount">Total: %s</string>
 
+    <string name="item_id">Item ID: #123456</string>
+    <string name="hotel_icon">Hotel Icon</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="car_icon">Car Icon</string>
+    <string name="not_available">N/A</string>
+
 
 
 </resources>

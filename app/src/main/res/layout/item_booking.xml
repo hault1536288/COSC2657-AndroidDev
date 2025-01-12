@@ -5,69 +5,156 @@
     android:orientation="vertical"
     android:background="@drawable/booking_card_background"
     android:padding="16dp"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="16dp">
+
+    <!-- Date Range and Item ID -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/dateRangeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="11/20/2024 → 11/23/2024"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemIdTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Item ID: #123456"
+            android:textSize="14sp"
+            android:textColor="@color/gray" />
+    </LinearLayout>
 
     <!-- Booking ID -->
     <TextView
         android:id="@+id/bookingIdTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="Booking ID: #123456"
+        android:textSize="14sp"
+        android:textColor="@color/primary"
+        android:layout_marginBottom="8dp" />
 
-    <!-- Date Range -->
-    <TextView
-        android:id="@+id/dateRangeTextView"
-        android:layout_width="wrap_content"
+    <!-- Hotel Info -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
 
-    <!-- Hotel Name -->
-    <TextView
-        android:id="@+id/hotelNameTextView"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_hotel"
+            android:contentDescription="Hotel Icon"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/hotelNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hotel Name 2"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Location Info -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
 
-    <!-- Location -->
-    <TextView
-        android:id="@+id/locationTextView"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_location"
+            android:contentDescription="Location Icon"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location A → Location B"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Car Info -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
-    <!-- Total Amount -->
-    <TextView
-        android:id="@+id/totalAmountTextView"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_car"
+            android:contentDescription="Car Icon"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/carInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="N/A"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- Total Amount and Status -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingBottom="8dp">
 
-    <!-- Status -->
-    <TextView
-        android:id="@+id/statusTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/totalAmountTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total: $450 USD"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-    <!-- Buttons for Current Booking -->
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Pending"
+            android:textSize="14sp"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <!-- Buttons -->
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp"
-        android:visibility="gone">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="Cancel Booking"
+            android:textColor="@color/white"
             android:backgroundTint="@color/red"
-            android:text="@string/cancel_booking"
-            android:textColor="@color/white" />
+            style="?android:attr/buttonBarButtonStyle" />
 
         <Button
             android:id="@+id/checkoutButton"
@@ -75,9 +162,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
+            android:text="Go to Checkout"
+            android:textColor="@color/white"
             android:backgroundTint="@color/primary"
-            android:text="@string/go_to_checkout"
-            android:textColor="@color/white" />
+            style="?android:attr/buttonBarButtonStyle" />
     </LinearLayout>
 
 </LinearLayout>
