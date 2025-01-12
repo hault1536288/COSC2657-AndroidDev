@@ -60,6 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         String firstName = firstNameEditText.getText().toString();
         String lastName = lastNameEditText.getText().toString();
         String dateOfBirth = dateOfBirthEditText.getText().toString();
+        String role = "customer";
 
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, task -> {
@@ -77,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                         userData.put("firstName", firstName);
                         userData.put("lastName", lastName);
                         userData.put("dateOfBirth", dateOfBirth);
+                        userData.put("role", role);
 
                         // Store user information in Firestore
                         db.collection("users").document(user.getUid()).set(userData)

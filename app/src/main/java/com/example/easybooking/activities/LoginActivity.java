@@ -50,13 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Check if user is already logged in
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            // User is logged in, navigate to the appropriate activity
-            fetchUserRoleAndNavigate(currentUser.getUid());
-        }
-
         // Configure Google Sign-In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(webClientId)
@@ -109,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
+                        assert user != null;
                         navigateToAppropriateActivity(user.getEmail());
                     } else {
                         Log.w("LoginActivity", "signInWithCredential:failure", task.getException());
@@ -118,15 +112,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void navigateToAppropriateActivity(String email) {
+        Intent intent;
         if (email != null && email.contains("admin")) {
             // Navigate to AdminActivity
-            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-            startActivity(intent);
+            intent = new Intent(LoginActivity.this, AdminActivity.class);
         } else {
             // Navigate to MainActivity
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            intent = new Intent(LoginActivity.this, MainActivity.class);
         }
+        startActivity(intent);
         finish(); // Close LoginActivity
     }
 
