@@ -8,42 +8,34 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.easybooking.fragments.BookingFragment;
-import com.example.easybooking.fragments.CarFragment;
-import com.example.easybooking.fragments.HotelFragment;
+import com.example.easybooking.fragments.CreateCarFragment;
+import com.example.easybooking.fragments.CreateHotelFragment;
+import com.example.easybooking.fragments.CreateTransportFragment;
 import com.example.easybooking.fragments.ProfileFragment;
-import com.example.easybooking.fragments.TransportFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.FirebaseApp;
 
-public class MainActivity extends AppCompatActivity {
-
-
+public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_admin);
 
-        FirebaseApp.initializeApp(this);
-
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        BottomNavigationView adminBottomNavigationView = findViewById(R.id.admin_bottom_navigation);
+        adminBottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.hotel) {
-                replaceFragment(new HotelFragment());
-            } else if (itemId == R.id.car) {
-                replaceFragment(new CarFragment());
-            } else if (itemId == R.id.transport) {
-                replaceFragment(new TransportFragment());
-            } else if (itemId == R.id.booking) {
-                replaceFragment(new BookingFragment());
+            if (itemId == R.id.create_hotel) {
+                replaceFragment(new CreateHotelFragment());
+            } else if (itemId == R.id.create_car) {
+                replaceFragment(new CreateCarFragment());
+            } else if (itemId == R.id.create_transport) {
+                replaceFragment(new CreateTransportFragment());
             } else if (itemId == R.id.profile) {
                 replaceFragment(new ProfileFragment());
             }
             return true;
         });
-        replaceFragment(new HotelFragment()); // Set initial fragment to Hotel
+        replaceFragment(new CreateHotelFragment()); // Set initial fragment to Hotel
     }
 
     private void replaceFragment(Fragment fragment) {

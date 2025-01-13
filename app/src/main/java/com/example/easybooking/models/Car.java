@@ -9,14 +9,14 @@ public class Car {
     private String brand;
     private String model;
     private String description;
-    private BigDecimal pricePerDay;
-    private BigDecimal pricePerHour;
+    private double pricePerDay;
+    private double pricePerHour;
 
     public Car() {
     }
 
     public Car(String carId, String carImageUrl, String name, String brand, String model, String description,
-               BigDecimal pricePerDay, BigDecimal pricePerHour) {
+               double pricePerDay, double pricePerHour) {
         this.carId = carId;
         this.carImageUrl = carImageUrl;
         this.name = name;
@@ -53,11 +53,11 @@ public class Car {
         return description;
     }
 
-    public BigDecimal getPricePerDay() {
+    public double getPricePerDay() {
         return pricePerDay;
     }
 
-    public BigDecimal getPricePerHour() {
+    public double getPricePerHour() {
         return pricePerHour;
     }
 }

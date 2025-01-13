@@ -15,26 +15,34 @@
         android:theme="@style/Theme.EasyBooking"
         tools:targetApi="31">
         <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.TransportTicketDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.CarDetailActivity"
             android:exported="false" />
         <activity
             android:name=".activities.HotelDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
+        <activity
+            android:name=".AdminActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
