@@ -1,7 +1,6 @@
 package com.example.easybooking.models;
 
 public class User {
-    private String userId;
     private String username;
     private String email;
     private String phone;
@@ -14,8 +13,7 @@ public class User {
         // Default constructor for Firebase deserialization
     }
 
-    public User(String userId, String username, String email, String phone, String firstName, String lastName, String role, String dateOfBirth) {
-        this.userId = userId;
+    public User(String username, String email, String phone, String firstName, String lastName, String role, String dateOfBirth) {
         this.username = username;
         this.email = email;
         this.phone = phone;
@@ -23,14 +21,6 @@ public class User {
         this.lastName = lastName;
         this.role = role;
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getUsername() {

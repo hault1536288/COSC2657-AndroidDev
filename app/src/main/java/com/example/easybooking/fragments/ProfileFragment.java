@@ -18,33 +18,43 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.easybooking.R;
 import com.example.easybooking.activities.LoginActivity;
+import com.example.easybooking.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
-    private EditText emailEditText, phoneEditText;
-    private ImageView emailEditButton, phoneEditButton;
-    private TextView changePasswordTextView;
-    private Button logoutButton;
+    private FirebaseFirestore firestore;
+    private EditText firstNameEditText, lastNameEditText, phoneEditText;
+    private ImageView firstNameEditButton, lastNameEditButton, phoneEditButton;
+    private TextView usernameTextView;
+    private User currentUser;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         // Initialize UI components
-        emailEditText = view.findViewById(R.id.emailEditText);
+        firstNameEditText = view.findViewById(R.id.firstNameEditText);
+        lastNameEditText = view.findViewById(R.id.lastNameEditText);
         phoneEditText = view.findViewById(R.id.phoneEditText);
-        emailEditButton = view.findViewById(R.id.emailEditButton);
+        firstNameEditButton = view.findViewById(R.id.firstNameEditButton);
+        lastNameEditButton = view.findViewById(R.id.lastNameEditButton);
         phoneEditButton = view.findViewById(R.id.phoneEditButton);
-        changePasswordTextView = view.findViewById(R.id.changePasswordTextView);
-        logoutButton = view.findViewById(R.id.logoutButton);
+        usernameTextView = view.findViewById(R.id.profileNameTextView);
+        TextView changePasswordTextView = view.findViewById(R.id.changePasswordTextView);
+        Button logoutButton = view.findViewById(R.id.logoutButton);
 
-        // Handle email edit button click
-        emailEditButton.setOnClickListener(v -> toggleEditMode(emailEditText, emailEditButton));
+        // Handle First Name edit button click
+        firstNameEditButton.setOnClickListener(v -> toggleEditMode(firstNameEditText, firstNameEditButton, "firstName"));
 
-        // Handle phone edit button click
-        phoneEditButton.setOnClickListener(v -> toggleEditMode(phoneEditText, phoneEditButton));
+        // Handle Last Name edit button click
+        lastNameEditButton.setOnClickListener(v -> toggleEditMode(lastNameEditText, lastNameEditButton, "lastName"));
+
+        // Handle Phone edit button click
+        phoneEditButton.setOnClickListener(v -> toggleEditMode(phoneEditText, phoneEditButton, "phone"));
 
         // Handle Change Password click
         changePasswordTextView.setOnClickListener(v -> {
@@ -66,20 +76,78 @@ public class ProfileFragment extends Fragment {
             getActivity().finish();
         });
 
+        // Load user profile data
+        loadUserProfile();
+
         return view;
     }
 
+    // Function to load user profile data from Firestore
+    private void loadUserProfile() {
+        String userId = mAuth.getCurrentUser().getUid();
+
+        firestore.collection("users")
+                .document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        currentUser = documentSnapshot.toObject(User.class);
+
+                        if (currentUser != null) {
+                            // Set username, first name, last name, and phone
+                            usernameTextView.setText(currentUser.getUsername());
+                            firstNameEditText.setText(currentUser.getFirstName());
+                            lastNameEditText.setText(currentUser.getLastName());
+                            phoneEditText.setText(currentUser.getPhone());
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to load user profile", Toast.LENGTH_SHORT).show();
+                });
+    }
+
     // Function to toggle edit mode
-    private void toggleEditMode(EditText editText, ImageView editButton) {
+    private void toggleEditMode(EditText editText, ImageView editButton, String field) {
         if (editText.isEnabled()) {
-            // Save the new value
-            editText.setEnabled(false);
-            editButton.setImageResource(R.drawable.ic_edit); // Change icon back to Edit
-            Toast.makeText(getContext(), "Information saved", Toast.LENGTH_SHORT).show();
+            // Get the new value entered by the user
+            String newValue = editText.getText().toString().trim();
+
+            // Check if the input is empty
+            if (newValue.isEmpty()) {
+                Toast.makeText(getContext(), "Field cannot be empty", Toast.LENGTH_SHORT).show();
+                return; // Do not save if the field is empty
+            }
+
+            // Save the new value to Firestore
+            if (field.equals("firstName")) {
+                currentUser.setFirstName(newValue);
+            } else if (field.equals("lastName")) {
+                currentUser.setLastName(newValue);
+            } else if (field.equals("phone")) {
+                currentUser.setPhone(newValue);
+            }
+
+            // Update the Firestore document with new values
+            firestore.collection("users")
+                    .document(mAuth.getCurrentUser().getUid())
+                    .set(currentUser)
+                    .addOnSuccessListener(aVoid -> {
+                        // Disable the EditText after saving the changes
+                        editText.setEnabled(false);
+                        editButton.setImageResource(R.drawable.ic_edit); // Change icon back to Edit
+                        Toast.makeText(getContext(), "Information saved", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(), "Failed to save information", Toast.LENGTH_SHORT).show();
+                    });
         } else {
             // Enable the EditText for editing
             editText.setEnabled(true);
             editButton.setImageResource(R.drawable.ic_save); // Change icon to Save
         }
     }
+
 }
