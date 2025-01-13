@@ -1,8 +1,7 @@
 <resources>
-    <string name="app_name">EasyBooking</string>
     <string name="nav_hotel_label">Hotel</string>
     <string name="nav_car_label">Car</string>
-    <string name="nav_transit_label">Transit</string>
+    <string name="nav_transport_label">Transport</string>
     <string name="nav_booking_label">Booking</string>
     <string name="nav_profile_label">Profile</string>
     <string name="placeholder_username">John Doe</string>
@@ -14,4 +13,36 @@
     <string name="sample_price_per_day"><b>$300/</b>day</string>
     <string name="sample_price_per_hour"><b>$30/</b>hour</string>
     <string name="sample_car_brand"><b>Brand: </b>Toyota</string>
+
+    <string name="your_bookings">Your Bookings</string>
+    <string name="current_booking">Current Booking</string>
+    <string name="history">History</string>
+    <string name="total_450_usd">Total: $450 USD</string>
+    <string name="pending">Pending</string>
+    <string name="success">Success</string>
+    <string name="cancel_booking">Cancel Booking</string>
+    <string name="go_to_checkout">Go to Checkout</string>
+    <string name="hotel_name_2">Hotel Name 2</string>
+    <string name="location_a_to_b">Location A → Location B</string>
+    <string name="_11_25_2024_11_28_2024">11/25/2024 → 11/28/2024</string>
+    <string name="booking_id_123456">Booking ID: #123456</string>
+    <string name="location_a_location_b">📍 Location A → Location B</string>
+    <string name="_11_20_2024_11_23_2024">11/20/2024 → 11/23/2024</string>
+    <string name="october_2024">October 2024</string>
+    <string name="_10_20_2024_10_23_2024">10/20/2024 → 10/23/2024</string>
+
+    <string name="app_name">EasyBooking</string>
+    <string name="booking_id">Booking ID: %s</string>
+    <string name="hotel_name">🏨 %s</string>
+    <string name="location">📍 %s</string>
+    <string name="total_amount">Total: %s</string>
+
+    <string name="item_id">Item ID: #123456</string>
+    <string name="hotel_icon">Hotel Icon</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="car_icon">Car Icon</string>
+    <string name="not_available">N/A</string>
+
+
+
 </resources>

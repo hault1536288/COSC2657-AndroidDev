@@ -12,7 +12,7 @@ import com.example.easybooking.fragments.BookingFragment;
 import com.example.easybooking.fragments.CarFragment;
 import com.example.easybooking.fragments.HotelFragment;
 import com.example.easybooking.fragments.ProfileFragment;
-import com.example.easybooking.fragments.TransitFragment;
+import com.example.easybooking.fragments.TransportFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.FirebaseApp;
 
@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new HotelFragment());
             } else if (itemId == R.id.car) {
                 replaceFragment(new CarFragment());
-            } else if (itemId == R.id.transit) {
-                replaceFragment(new TransitFragment());
+            } else if (itemId == R.id.transport) {
+                replaceFragment(new TransportFragment());
             } else if (itemId == R.id.booking) {
                 replaceFragment(new BookingFragment());
             } else if (itemId == R.id.profile) {

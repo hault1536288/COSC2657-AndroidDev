@@ -7,110 +7,156 @@
     android:background="@color/anti_flash_white"
     tools:context=".fragments.ProfileFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="40dp"
-        android:paddingTop="100dp">
-
-        <ImageView
-            android:id="@+id/avatarImageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_placeholder_user" />
-
-        <TextView
-            android:id="@+id/usernameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20sp"
-            android:text="@string/placeholder_username"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10sp"
-            android:text="Personal Information"
-            android:textSize="18sp" />
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="40dp"
+            android:paddingTop="100dp">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Email"
-                android:textSize="20sp" />
-
+            <!-- Profile Picture -->
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:id="@+id/avatarImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_edit" />
-        </LinearLayout>
+                android:src="@drawable/ic_placeholder_user" />
 
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bordered_input_field"
-            android:inputType="textEmailAddress"
-            android:text="@string/placeholder_email" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp">
-
+            <!-- Username -->
             <TextView
-                android:layout_width="0dp"
+                android:id="@+id/profileNameTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Phone"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_edit" />
+                android:layout_marginTop="20sp"
+                android:text="Loading..."
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <!-- Personal Information Label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10sp"
+                android:text="Personal Information"
+                android:textSize="18sp" />
+
+            <!-- First Name Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="First Name"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/firstNameEditButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_edit" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/firstNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:text="Loading..."
+                android:enabled="false" />
+
+            <!-- Last Name Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Last Name"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/lastNameEditButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_edit" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/lastNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:text="Loading..."
+                android:enabled="false" />
+
+            <!-- Phone Field -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Phone"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/phoneEditButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_edit" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bordered_input_field"
+                android:inputType="phone"
+                android:text="Loading..."
+                android:enabled="false" />
+
+            <!-- Change Password Label -->
+            <TextView
+                android:id="@+id/changePasswordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:text="@string/change_password"
+                android:textSize="18sp" />
+
+            <!-- Logout Button -->
+            <Button
+                android:id="@+id/logoutButton"
+                style="@style/OnyxButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="@string/log_out" />
+
         </LinearLayout>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/bordered_input_field"
-            android:inputType="textEmailAddress"
-            android:text="@string/placeholder_phone" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20sp"
-            android:text="@string/change_password"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/logOutButton"
-            style="@style/OnyxButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:text="@string/log_out" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

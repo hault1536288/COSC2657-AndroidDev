@@ -11,14 +11,14 @@ public class Hotel {
     private double latitude;
     private double longitude;
     private double rating;
-    private BigDecimal pricePerNight;
-    private BigDecimal pricePerHour;
+    private double pricePerNight;
+    private double pricePerHour;
 
     public Hotel() {
     }
 
     public Hotel(String hotelId, String hotelImageUrl, String name, String description, String location,
-                 double latitude, double longitude, double rating, BigDecimal pricePerNight, BigDecimal pricePerHour) {
+                 double latitude, double longitude, double rating, double pricePerNight, double pricePerHour) {
         this.hotelId = hotelId;
         this.hotelImageUrl = hotelImageUrl;
         this.name = name;
@@ -63,11 +63,11 @@ public class Hotel {
         return rating;
     }
 
-    public BigDecimal getPricePerNight() {
+    public double getPricePerNight() {
         return pricePerNight;
     }
 
-    public BigDecimal getPricePerHour() {
+    public double getPricePerHour() {
         return pricePerHour;
     }
 }

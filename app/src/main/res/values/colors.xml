@@ -9,4 +9,9 @@
     <color name="wheat">#F8DEB5</color>
     <color name="gray85">#D9D9D9</color>
     <color name="anti_flash_white">#F2F2F2</color>
+    <color name="fire_engine_red">#BC1823 </color>
+    <color name="primary">#6200EE</color>
+    <color name="red">#D32F2F</color>
+    <color name="green">#388E3C</color>
+
 </resources>
