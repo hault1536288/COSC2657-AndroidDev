@@ -34,6 +34,54 @@ public class Transport {
         this.arrivalLongitude = arrivalLongitude;
     }
 
+    public void setTransportId(String transportId) {
+        this.transportId = transportId;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public void setDepartureLocation(String departureLocation) {
+        this.departureLocation = departureLocation;
+    }
+
+    public void setArrivalLocation(String arrivalLocation) {
+        this.arrivalLocation = arrivalLocation;
+    }
+
+    public void setDepartureLatitude(double departureLatitude) {
+        this.departureLatitude = departureLatitude;
+    }
+
+    public void setDepartureLongitude(double departureLongitude) {
+        this.departureLongitude = departureLongitude;
+    }
+
+    public void setArrivalLatitude(double arrivalLatitude) {
+        this.arrivalLatitude = arrivalLatitude;
+    }
+
+    public void setArrivalLongitude(double arrivalLongitude) {
+        this.arrivalLongitude = arrivalLongitude;
+    }
+
     public String getTransportId() {
         return transportId;
     }
