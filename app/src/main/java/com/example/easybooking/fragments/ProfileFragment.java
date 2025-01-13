@@ -1,5 +1,6 @@
 package com.example.easybooking.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.easybooking.R;
+import com.example.easybooking.activities.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
-
+    private FirebaseAuth mAuth;
     private EditText emailEditText, phoneEditText;
     private ImageView emailEditButton, phoneEditButton;
     private TextView changePasswordTextView;
@@ -27,6 +30,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        mAuth = FirebaseAuth.getInstance();
 
         // Initialize UI components
         emailEditText = view.findViewById(R.id.emailEditText);
@@ -52,8 +56,14 @@ public class ProfileFragment extends Fragment {
 
         // Handle logout button click
         logoutButton.setOnClickListener(v -> {
-            // Handle logout functionality
+            // Sign out the user
+            mAuth.signOut();
             Toast.makeText(getContext(), "Logged out", Toast.LENGTH_SHORT).show();
+            // Navigate to LoginActivity
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            getActivity().finish();
         });
 
         return view;
