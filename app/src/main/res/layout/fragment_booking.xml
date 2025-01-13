@@ -4,74 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/anti_flash_white"
     tools:context=".fragments.BookingFragment">
 
-    <!-- Header Title -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/onyx"
-        android:padding="16dp"
-        android:layout_marginBottom="24dp"> <!-- Increased bottom margin to separate header -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/your_bookings"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
-
-    <!-- Content Section -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="40dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
-
+        android:orientation="vertical">
+        <!-- Header Title -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/onyx"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <!-- Current Booking Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/current_booking"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="16dp" /> <!-- Added top margin -->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/currentBookingRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp" />
-
-            <!-- History Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/history"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="16dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/historyRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp" />
+                android:text="@string/your_bookings"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
+        <!-- Content Section -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-    </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
+                <!-- Current Booking Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/current_booking"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/currentBookingRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- History Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/history"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/historyRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="16dp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
 </FrameLayout>

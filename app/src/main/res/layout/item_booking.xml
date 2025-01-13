@@ -1,63 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/booking_card_background"
-    android:padding="16dp"
-    android:layout_marginBottom="16dp">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Date Range and Item ID -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Date Range -->
+    <TextView
+        android:id="@+id/dateRangeTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:paddingBottom="8dp">
-
-        <TextView
-            android:id="@+id/dateRangeTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="11/20/2024 → 11/23/2024"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/itemIdTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="Item ID: #123456"
-            android:textSize="14sp"
-            android:textColor="@color/gray" />
-    </LinearLayout>
+        android:text="11/20/2024 → 11/23/2024"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <!-- Booking ID -->
     <TextView
         android:id="@+id/bookingIdTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Booking ID: #123456"
-        android:textSize="14sp"
         android:textColor="@color/primary"
-        android:layout_marginBottom="8dp" />
+        android:textSize="14sp" />
 
     <!-- Hotel Info -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_hotel"
+            android:layout_marginEnd="8dp"
             android:contentDescription="Hotel Icon"
-            android:layout_marginEnd="8dp" />
+            android:src="@drawable/ic_hotel" />
 
         <TextView
             android:id="@+id/hotelNameTextView"
@@ -71,15 +54,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_location"
+            android:layout_marginEnd="8dp"
             android:contentDescription="Location Icon"
-            android:layout_marginEnd="8dp" />
+            android:src="@drawable/ic_location" />
 
         <TextView
             android:id="@+id/locationTextView"
@@ -93,15 +77,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_car"
+            android:layout_marginEnd="8dp"
             android:contentDescription="Car Icon"
-            android:layout_marginEnd="8dp" />
+            android:src="@drawable/ic_car" />
 
         <TextView
             android:id="@+id/carInfoTextView"
@@ -116,8 +101,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        android:weightSum="2">
 
         <TextView
             android:id="@+id/totalAmountTextView"
@@ -135,8 +120,8 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="Pending"
-            android:textSize="14sp"
-            android:textColor="@color/gray" />
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <!-- Buttons -->
@@ -151,21 +136,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@color/fire_engine_red"
+            android:padding="13dp"
             android:text="Cancel Booking"
             android:textColor="@color/white"
-            android:backgroundTint="@color/red"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="10dp" />
 
         <Button
             android:id="@+id/checkoutButton"
+            style="@style/OnyxButtonStyle"
             android:layout_width="0dp"
+            android:layout_marginStart="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"
             android:text="Go to Checkout"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/primary"
-            style="?android:attr/buttonBarButtonStyle" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

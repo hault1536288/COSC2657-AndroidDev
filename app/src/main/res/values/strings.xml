@@ -1,7 +1,7 @@
 <resources>
     <string name="nav_hotel_label">Hotel</string>
     <string name="nav_car_label">Car</string>
-    <string name="nav_transport_label">Transit</string>
+    <string name="nav_transport_label">Transport</string>
     <string name="nav_booking_label">Booking</string>
     <string name="nav_profile_label">Profile</string>
     <string name="placeholder_username">John Doe</string>

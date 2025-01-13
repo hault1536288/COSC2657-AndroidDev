@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
-                android:hint="e.g: Toyota Corolla 2024" />
+                android:hint="e.g., Toyota Corolla 2024" />
 
             <!-- Brand -->
             <TextView
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
-                android:hint="e.g: Toyota" />
+                android:hint="e.g., Toyota" />
 
             <!-- Model -->
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
-                android:hint="e.g: TC24" />
+                android:hint="e.g., TC24" />
 
             <!-- Description -->
             <TextView
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
-                android:hint="e.g: This is a super car with 1000 horsepower" />
+                android:hint="e.g., This is a super car with 1000 horsepower" />
 
             <!-- Price Per Day -->
             <TextView
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
-                android:hint="$200"
+                android:hint="e.g., $200"
                 android:inputType="numberDecimal" />
 
             <!-- Price Per Hour -->
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
-                android:hint="$20"
+                android:hint="e.g., $20"
                 android:inputType="numberDecimal" />
 
             <!-- Create Car Button -->
