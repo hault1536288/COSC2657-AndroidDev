@@ -106,7 +106,7 @@ public class HotelFragment extends Fragment implements RecyclerViewInterface {
     public void onItemClick(int position) {
         Intent intent = new Intent(getContext(), HotelDetailActivity.class);
         // Get the selected hotel
-        Hotel selectedHotel = HotelData.getExampleHotelList().get(position);
+        Hotel selectedHotel = hotelArrayList.get(position);
         // Pass the selected hotel to the HotelDetailActivity
         intent.putExtra("HOTEL_IMAGE_URL", selectedHotel.getImageUrl());
         intent.putExtra("HOTEL_NAME", selectedHotel.getHotelName());
