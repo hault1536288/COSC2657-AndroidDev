@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="cloudinary_cloud_name">rmeettest</string>
+    <string name="cloudinary_api_key">742546574756774</string>
+    <string name="cloudinary_api_secret">g721iXFIedESRLFeGZs3R-TKlFY</string>
+</resources>
