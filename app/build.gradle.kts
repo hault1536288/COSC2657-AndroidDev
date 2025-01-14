@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.auth)
+    implementation(libs.play.services.maps)
     implementation("com.google.android.gms:play-services-auth:20.5.0")
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.cloudinary:cloudinary-android:3.0.2")
