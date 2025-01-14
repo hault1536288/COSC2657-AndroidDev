@@ -37,7 +37,6 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.common)
     implementation(libs.recyclerview)
-    implementation(libs.firebase.storage)
     annotationProcessor(libs.compiler)
     implementation(libs.material)
     implementation(libs.appcompat)

@@ -1,8 +1,12 @@
 package com.example.easybooking.fragments;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
@@ -16,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.easybooking.R;
+import com.example.easybooking.activities.MapSelectionActivity;
 import com.example.easybooking.models.Transport;
 import com.example.easybooking.utils.FirestoreUtils;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -69,6 +74,10 @@ public class CreateTransportFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         transportTypeSpinner.setAdapter(adapter);
 
+        // Map fragment click listeners
+        view.findViewById(R.id.departureMapButton).setOnClickListener(v -> openMapForLocation("departure"));
+        view.findViewById(R.id.arrivalMapButton).setOnClickListener(v -> openMapForLocation("arrival"));
+
         // Set date picker for date fields
         setupDatePicker(departureDateEditText, true);
         setupDatePicker(arrivalDateEditText, false);
@@ -77,6 +86,32 @@ public class CreateTransportFragment extends Fragment {
 
         return view;
     }
+
+    private void openMapForLocation(String type) {
+        Intent intent = new Intent(getContext(), MapSelectionActivity.class);
+        intent.putExtra("locationType", type); // Pass type for identifying departure/arrival
+        mapLauncher.launch(intent);
+    }
+
+    // Handle the result from MapSelectionActivity
+    private final ActivityResultLauncher<Intent> mapLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    String type = result.getData().getStringExtra("locationType");
+                    double latitude = result.getData().getDoubleExtra("latitude", 0.0);
+                    double longitude = result.getData().getDoubleExtra("longitude", 0.0);
+
+                    if ("departure".equals(type)) {
+                        departureLatitudeEditText.setText(String.valueOf(latitude));
+                        departureLongitudeEditText.setText(String.valueOf(longitude));
+                    } else if ("arrival".equals(type)) {
+                        arrivalLatitudeEditText.setText(String.valueOf(latitude));
+                        arrivalLongitudeEditText.setText(String.valueOf(longitude));
+                    }
+                }
+            }
+    );
 
     private void setupDatePicker(EditText dateEditText, boolean isDeparture) {
         dateEditText.setInputType(InputType.TYPE_NULL);

@@ -53,7 +53,6 @@ public class TransportFragment extends Fragment implements RecyclerViewInterface
         transportsRecyclerView = view.findViewById(R.id.transportsRecyclerView);
         transportArrayList = new ArrayList<>();
         adapter = new TransportRecyclerViewAdapter(getContext(), transportArrayList, this);
-
         transportsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         transportsRecyclerView.setAdapter(adapter);
 

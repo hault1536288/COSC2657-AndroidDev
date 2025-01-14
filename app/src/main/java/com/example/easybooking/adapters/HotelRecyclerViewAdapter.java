@@ -39,16 +39,15 @@ public class HotelRecyclerViewAdapter extends RecyclerView.Adapter<HotelRecycler
     @Override
     public void onBindViewHolder(@NonNull HotelRecyclerViewAdapter.HotelViewHolder holder, int position) {
         Glide.with(context)
-                .load(hotelArrayList.get(position).getHotelImageUrl())
+                .load(hotelArrayList.get(position).getImageUrl())
                 .placeholder(R.drawable.ic_hotel)
                 .error(R.drawable.ic_hotel)
                 .transform(new RoundedCorners(10))
                 .into(holder.hotelImageView);
-        holder.hotelNameTextView.setText(hotelArrayList.get(position).getName());
-        holder.hotelRatingTextView.setText(String.valueOf(hotelArrayList.get(position).getRating()));
+        holder.hotelNameTextView.setText(hotelArrayList.get(position).getHotelName());
         holder.hotelLocationTextView.setText(hotelArrayList.get(position).getLocation());
-        holder.hotelPricePerNightTextView.setText("$" + hotelArrayList.get(position).getPricePerNight() + "/night");
-        holder.hotelPricePerHourTextView.setText("$" + hotelArrayList.get(position).getPricePerHour() + "/hour");
+        holder.hotelPricePerNightTextView.setText("$" + hotelArrayList.get(position).getPricePerNight());
+        holder.hotelPricePerHourTextView.setText("$" + hotelArrayList.get(position).getPricePerHour());
     }
 
     @Override
@@ -58,14 +57,13 @@ public class HotelRecyclerViewAdapter extends RecyclerView.Adapter<HotelRecycler
 
     public static class HotelViewHolder extends RecyclerView.ViewHolder {
         ImageView hotelImageView;
-        TextView hotelNameTextView, hotelRatingTextView, hotelLocationTextView, hotelPricePerNightTextView, hotelPricePerHourTextView;
+        TextView hotelNameTextView, hotelLocationTextView, hotelPricePerNightTextView, hotelPricePerHourTextView;
 
         public HotelViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             hotelImageView = itemView.findViewById(R.id.hotelImageView);
             hotelNameTextView = itemView.findViewById(R.id.hotelNameTextView);
-            hotelRatingTextView = itemView.findViewById(R.id.hotelRatingTextView);
             hotelLocationTextView = itemView.findViewById(R.id.hotelLocationTextView);
             hotelPricePerNightTextView = itemView.findViewById(R.id.hotelPricePerNightTextView);
             hotelPricePerHourTextView = itemView.findViewById(R.id.hotelPricePerHourTextView);
