@@ -45,19 +45,6 @@
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/hotelRatingTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/wheat"
-            android:paddingHorizontal="10dp"
-            android:text="8.5"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:cornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <ImageView
             android:id="@+id/ic_location"
             android:layout_width="20dp"
@@ -95,10 +82,19 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
-            android:text="$300/night"
+            android:text="$300"
             android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/ic_price"
             app:layout_constraintTop_toBottomOf="@+id/hotelLocationTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/night"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/hotelPricePerNightTextView"
+            app:layout_constraintStart_toEndOf="@id/hotelPricePerNightTextView"/>
 
         <TextView
             android:id="@+id/hotelPricePerHourTextView"
@@ -106,10 +102,19 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
-            android:text="$30/hour"
+            android:textStyle="bold"
+            android:text="$30"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/ic_price"
             app:layout_constraintTop_toBottomOf="@+id/hotelPricePerNightTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/hour"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/hotelPricePerHourTextView"
+            app:layout_constraintStart_toEndOf="@id/hotelPricePerHourTextView"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
