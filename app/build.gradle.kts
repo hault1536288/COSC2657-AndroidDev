@@ -37,6 +37,7 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.common)
     implementation(libs.recyclerview)
+    implementation(libs.play.services.maps)
     annotationProcessor(libs.compiler)
     implementation(libs.material)
     implementation(libs.appcompat)

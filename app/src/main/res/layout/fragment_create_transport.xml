@@ -122,6 +122,16 @@
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., -74.0060" />
 
+            <!-- Departure Map -->
+            <Button
+                android:id="@+id/departureMapButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Choose coordinates from map"
+                style="@style/OnyxButtonStyle"
+                android:textSize="16sp" />
+
             <!-- Divider -->
             <View
                 android:layout_width="match_parent"
@@ -176,6 +186,16 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., -77.0369" />
+
+            <!-- Arrival Map -->
+            <Button
+                android:id="@+id/arrivalMapButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Choose coordinates from map"
+                style="@style/OnyxButtonStyle"
+                android:textSize="16sp" />
 
             <!-- Divider -->
             <View
