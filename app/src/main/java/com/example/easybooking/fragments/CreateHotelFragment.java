@@ -201,13 +201,13 @@ public class CreateHotelFragment extends Fragment {
         try {
             double latitude = Double.parseDouble(latitudeEditText.getText().toString());
             double longitude = Double.parseDouble(longitudeEditText.getText().toString());
-            GeoPoint coordinates = new GeoPoint(latitude, longitude);
 
             Map<String, Object> hotelData = new HashMap<>();
             hotelData.put("hotelName", nameEditText.getText().toString().trim());
             hotelData.put("description", descriptionEditText.getText().toString().trim());
             hotelData.put("location", locationEditText.getText().toString().trim());
-            hotelData.put("coordinates", coordinates);
+            hotelData.put("latitude", latitude);
+            hotelData.put("longitude", longitude);
             hotelData.put("pricePerNight", Double.parseDouble(pricePerNightEditText.getText().toString()));
             hotelData.put("pricePerHour", Double.parseDouble(pricePerHourEditText.getText().toString()));
             hotelData.put("imageUrl", imageUrl);
