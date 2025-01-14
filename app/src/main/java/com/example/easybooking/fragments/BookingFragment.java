@@ -1,9 +1,12 @@
 package com.example.easybooking.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,13 +15,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easybooking.R;
-import com.example.easybooking.adapters.BookingAdapter;
+import com.example.easybooking.adapters.BookingRecyclerViewAdapter;
 import com.example.easybooking.models.Booking;
+import com.example.easybooking.models.Car;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class BookingFragment extends Fragment {
+    private RecyclerView currentBookingRecyclerView, historyRecyclerView;
+    private ArrayList<Booking> currentBookingList, historyBookingList;
+    private BookingRecyclerViewAdapter currentBookingAdapter, historyBookingAdapter;
+    private FirebaseAuth mAuth;
+    private String currentUserId;
+    private FirebaseFirestore firestore;
+    private TextView noCurrentBookingMessage, noHistoryMessage;
 
     public BookingFragment() {
         // Required empty public constructor
@@ -27,28 +42,88 @@ public class BookingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_booking, container, false);
+        // Initialize the RecyclerViews
+        currentBookingRecyclerView = view.findViewById(R.id.currentBookingRecyclerView);
+        historyRecyclerView = view.findViewById(R.id.historyRecyclerView);
+        noCurrentBookingMessage = view.findViewById(R.id.noCurrentBookingMessage);
+        noHistoryMessage = view.findViewById(R.id.noHistoryMessage);
 
-        RecyclerView currentBookingRecyclerView = view.findViewById(R.id.currentBookingRecyclerView);
-        RecyclerView historyRecyclerView = view.findViewById(R.id.historyRecyclerView);
+        currentBookingList = new ArrayList<>();
+        historyBookingList = new ArrayList<>();
+
+        // Set up the adapters
+        currentBookingAdapter = new BookingRecyclerViewAdapter(getContext(), currentBookingList);
+        historyBookingAdapter = new BookingRecyclerViewAdapter(getContext(), historyBookingList);
 
         currentBookingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         historyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Sample data for current bookings
-        List<Booking> currentBookings = new ArrayList<>();
-        currentBookings.add(new Booking("#123456", "11/20/2024 → 11/23/2024", "Hotel Name 2", "Location A → Location B", "N/A", "$450 USD", "Pending", true));
+        currentBookingRecyclerView.setAdapter(currentBookingAdapter);
+        historyRecyclerView.setAdapter(historyBookingAdapter);
 
-        // Sample data for history
-        List<Booking> historyBookings = new ArrayList<>();
-        historyBookings.add(new Booking("#123457", "11/25/2024 → 11/28/2024", "Hotel Name 3", "Location C → Location D", "Car Name", "$350 USD", "Success", false));
-        historyBookings.add(new Booking("#123458", "10/20/2024 → 10/23/2024", "Hotel Name 4", "Location E → Location F", null, "$500 USD", "Success", false));
+        // Initialize Firestore
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        firestore = FirebaseFirestore.getInstance();
 
-        BookingAdapter currentAdapter = new BookingAdapter(currentBookings, getContext());
-        BookingAdapter historyAdapter = new BookingAdapter(historyBookings, getContext());
-
-        currentBookingRecyclerView.setAdapter(currentAdapter);
-        historyRecyclerView.setAdapter(historyAdapter);
+        // Fetch data from Firestore
+        fetchBookingData();
 
         return view;
+    }
+
+    private void fetchBookingData() {
+        firestore.collection("bookings")
+                .whereEqualTo("userId", currentUserId) // Filter bookings where userId matches the current user's ID
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot querySnapshot = task.getResult();
+                        if (querySnapshot != null) {
+                            // Clear both lists before adding new data
+                            currentBookingList.clear();
+                            historyBookingList.clear();
+
+                            // Loop through each booking document
+                            for (DocumentSnapshot document : querySnapshot.getDocuments()) {
+                                Booking booking = document.toObject(Booking.class);
+                                if (booking != null) {
+                                    booking.setBookingId(document.getId()); // Set document ID as booking ID
+
+                                    // Check the booking status and add to the appropriate list
+                                    if ("pending".equalsIgnoreCase(booking.getStatus())) {
+                                        currentBookingList.add(booking);
+                                    } else {
+                                        historyBookingList.add(booking);
+                                    }
+                                }
+                            }
+
+                            // Show or hide the empty messages
+                            if (currentBookingList.isEmpty()) {
+                                noCurrentBookingMessage.setVisibility(View.VISIBLE);
+                            } else {
+                                noCurrentBookingMessage.setVisibility(View.GONE);
+                            }
+
+                            if (historyBookingList.isEmpty()) {
+                                noHistoryMessage.setVisibility(View.VISIBLE);
+                            } else {
+                                noHistoryMessage.setVisibility(View.GONE);
+                            }
+
+                            // Notify the adapters to update the RecyclerViews
+                            currentBookingAdapter.notifyDataSetChanged();
+                            historyBookingAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Log.e("BookingFragment", "Error fetching data", task.getException());
+                        Toast.makeText(getContext(), "Failed to load bookings", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("BookingFragment", "Error fetching data", e);
+                    Toast.makeText(getContext(), "Failed to load bookings", Toast.LENGTH_SHORT).show();
+                });
     }
 }

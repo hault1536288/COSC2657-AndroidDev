@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="12dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/current_booking"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -53,15 +53,22 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/currentBookingRecyclerView"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/noCurrentBookingMessage"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp" />
+                    android:text="You have no current booking"
+                    android:textColor="@color/gray"
+                    android:visibility="gone" />
 
                 <!-- History Section -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="5dp"
                     android:text="@string/history"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -69,8 +76,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/historyRecyclerView"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/noHistoryMessage"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp" />
+                    android:text="You have no booking history"
+                    android:textColor="@color/gray"
+                    android:visibility="gone" />
 
             </LinearLayout>
 
