@@ -52,6 +52,13 @@
                 android:layout_marginVertical="10dp"
                 android:text="+ Upload Image" />
 
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
+
             <!-- Car Name -->
             <TextView
                 android:layout_width="match_parent"
@@ -100,6 +107,13 @@
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., TC24" />
 
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
+
             <!-- Description -->
             <TextView
                 android:layout_width="match_parent"
@@ -115,6 +129,13 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., This is a super car with 1000 horsepower" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
 
             <!-- Price Per Day -->
             <TextView
@@ -149,6 +170,13 @@
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., $20"
                 android:inputType="numberDecimal" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
 
             <!-- Create Car Button -->
             <Button

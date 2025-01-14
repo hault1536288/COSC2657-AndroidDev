@@ -55,6 +55,13 @@
                 android:layout_marginVertical="10dp"
                 android:text="+ Upload Image" />
 
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
+
             <!-- Hotel Name -->
             <TextView
                 android:layout_width="match_parent"
