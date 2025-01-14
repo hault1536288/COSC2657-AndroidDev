@@ -1,6 +1,7 @@
 package com.example.easybooking.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easybooking.R;
+import com.example.easybooking.activities.BookingDetailActivity;
+import com.example.easybooking.activities.CarDetailActivity;
 import com.example.easybooking.models.Booking;
 
 import java.util.ArrayList;
@@ -45,7 +48,55 @@ public class BookingRecyclerViewAdapter extends RecyclerView.Adapter<BookingRecy
         holder.locationTextView.setText(booking.getLocationRange());
         holder.carInfoTextView.setText(booking.getCarName());
         holder.totalAmountTextView.setText("$" + String.valueOf(booking.getTotalAmount()));
-        holder.statusTextView.setText(booking.getStatus());
+        // change color based on status
+        if ("pending".equalsIgnoreCase(booking.getStatus())) {
+            holder.statusTextView.setTextColor(context.getResources().getColor(R.color.gray));
+        } else if ("success".equalsIgnoreCase(booking.getStatus())) {
+            holder.statusTextView.setTextColor(context.getResources().getColor(R.color.green));
+        } else if ("cancelled".equalsIgnoreCase(booking.getStatus())) {
+            holder.statusTextView.setTextColor(context.getResources().getColor(R.color.red));
+        }
+
+        if ("pending".equalsIgnoreCase(booking.getStatus())) {
+            holder.cancelButton.setVisibility(View.VISIBLE);
+            holder.checkoutButton.setVisibility(View.VISIBLE);
+        } else {
+            holder.cancelButton.setVisibility(View.GONE);
+            holder.checkoutButton.setVisibility(View.GONE);
+        }
+
+        // Set up button click listener
+        holder.cancelButton.setOnClickListener(v -> {
+            // Handle cancel button click
+        });
+        holder.checkoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(context, BookingDetailActivity.class);
+
+            // Pass data to the CarDetailActivity
+            intent.putExtra("BOOKING_ID", booking.getBookingId());
+            intent.putExtra("BOOKING_STATUS", booking.getStatus());
+            intent.putExtra("HOTEL_NAME", booking.getHotelName());
+            intent.putExtra("HOTEL_LOCATION", booking.getHotelLocation());
+            intent.putExtra("HOTEL_STAY_DURATION", booking.getSpecificDateRange("hotel"));
+            intent.putExtra("HOTEL_TOTAL", booking.getHotelTotal());
+            intent.putExtra("TRANSPORT_TYPE", booking.getTransportType());
+            intent.putExtra("TRANSPORT_BRAND", booking.getTransportBrand());
+            intent.putExtra("TRANSPORT_TOTAL", booking.getTransportTotal());
+            intent.putExtra("DEPARTURE_LOCATION", booking.getTransportDepartureLocation());
+            intent.putExtra("DEPARTURE_TIME", booking.getTransportDepartureTime());
+            intent.putExtra("DEPARTURE_DATE", booking.getTransportDepartureDay());
+            intent.putExtra("ARRIVAL_LOCATION", booking.getTransportArrivalLocation());
+            intent.putExtra("ARRIVAL_TIME", booking.getTransportArrivalTime());
+            intent.putExtra("ARRIVAL_DATE", booking.getTransportArrivalDay());
+            intent.putExtra("CAR_NAME", booking.getCarName());
+            intent.putExtra("CAR_BRAND", booking.getCarBrand());
+            intent.putExtra("CAR_MODEL", booking.getCarModel());
+            intent.putExtra("CAR_RENT_DURATION", booking.getSpecificDateRange("car"));
+            intent.putExtra("CAR_TOTAL", booking.getCarTotal());
+            intent.putExtra("TOTAL_AMOUNT", booking.getTotalAmount());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override
