@@ -1,5 +1,7 @@
 package com.example.easybooking.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.easybooking.R;
+import com.example.easybooking.activities.MapSelectionActivity;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
@@ -46,6 +49,7 @@ public class CreateHotelFragment extends Fragment {
     
     private FirebaseFirestore db;
     private ActivityResultLauncher<String> imagePickerLauncher;
+    private ActivityResultLauncher<Intent> mapLauncher;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +66,20 @@ public class CreateHotelFragment extends Fragment {
                 }
             }
         );
+
+        mapLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                        double latitude = result.getData().getDoubleExtra("latitude", 0.0);
+                        double longitude = result.getData().getDoubleExtra("longitude", 0.0);
+
+                        // Update the coordinates in the text fields
+                        latitudeEditText.setText(String.valueOf(latitude));
+                        longitudeEditText.setText(String.valueOf(longitude));
+                    }
+                }
+        );
     }
 
     @Override
@@ -72,11 +90,18 @@ public class CreateHotelFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
         
         initializeViews(view);
-        
+
+        // Map button click listener
+        view.findViewById(R.id.locationMapButton).setOnClickListener(v -> openMapForCoordinates());
         uploadImageButton.setOnClickListener(v -> openImageChooser());
         createHotelButton.setOnClickListener(v -> uploadHotelData());
         
         return view;
+    }
+
+    private void openMapForCoordinates() {
+        Intent intent = new Intent(getContext(), MapSelectionActivity.class);
+        mapLauncher.launch(intent);
     }
 
     private void initCloudinary() {

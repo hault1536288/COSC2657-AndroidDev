@@ -87,6 +87,13 @@
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., A luxury hotel in the city center" />
 
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
+
             <!-- Location -->
             <TextView
                 android:layout_width="match_parent"
@@ -135,6 +142,23 @@
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., -74.0060" />
 
+            <!-- Location Map -->
+            <Button
+                android:id="@+id/locationMapButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Choose coordinates from map"
+                style="@style/OnyxButtonStyle"
+                android:textSize="16sp" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
+
             <!-- Price Per Night -->
             <TextView
                 android:layout_width="match_parent"
@@ -168,6 +192,13 @@
                 android:background="@drawable/bordered_input_field"
                 android:hint="e.g., $20"
                 android:inputType="numberDecimal" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#D3D3D3" />
 
             <!-- Create Hotel Button -->
             <Button
