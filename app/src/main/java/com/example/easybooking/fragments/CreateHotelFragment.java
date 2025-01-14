@@ -82,12 +82,12 @@ public class CreateHotelFragment extends Fragment {
     private void initCloudinary() {
         try {
             Map<String, String> config = new HashMap<>();
-            config.put("cloud_name", "YOUR_CLOUD_NAME");
-            config.put("api_key", "YOUR_API_KEY");
-            config.put("api_secret", "YOUR_API_SECRET");
+            config.put("cloud_name", getString(R.string.cloudinary_cloud_name));
+            config.put("api_key", getString(R.string.cloudinary_api_key));
+            config.put("api_secret", getString(R.string.cloudinary_api_secret));
             MediaManager.init(requireContext(), config);
         } catch (IllegalStateException e) {
-            
+            showToast("Error initializing Cloudinary: " + e.getMessage());
         }
     }
 
