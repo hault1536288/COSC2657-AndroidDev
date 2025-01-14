@@ -61,6 +61,8 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
             intent.putExtra("CAR_BRAND", carArrayList.get(position).getBrand());
             intent.putExtra("CAR_MODEL", carArrayList.get(position).getModel());
             intent.putExtra("CAR_DESCRIPTION", carArrayList.get(position).getDescription());
+            intent.putExtra("CAR_PRICE_PER_DAY", carArrayList.get(position).getPricePerDay());
+            intent.putExtra("CAR_PRICE_PER_HOUR", carArrayList.get(position).getPricePerHour());
 
             context.startActivity(intent);
         });

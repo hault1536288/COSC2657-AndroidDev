@@ -28,12 +28,15 @@ public class CarDetailActivity extends AppCompatActivity {
         String carBrand = getIntent().getStringExtra("CAR_BRAND");
         String carModel = getIntent().getStringExtra("CAR_MODEL");
         String carDescription = getIntent().getStringExtra("CAR_DESCRIPTION");
+        double carPricePerDay = getIntent().getDoubleExtra("CAR_PRICE_PER_DAY", 0.0);
+        double carPricePerHour = getIntent().getDoubleExtra("CAR_PRICE_PER_HOUR", 0.0);
 
         ImageView carDetailImageView = findViewById(R.id.carDetailImageView);
         TextView carDetailNameTextView = findViewById(R.id.carDetailNameTextView);
         TextView carDetailBrandTextView = findViewById(R.id.carDetailBrandTextView);
         TextView carDetailModelTextView = findViewById(R.id.carDetailModelTextView);
         TextView carDetailDescriptionTextView = findViewById(R.id.carDetailDescriptionTextView);
+        TextView carDetailPriceTextView = findViewById(R.id.carDetailPriceTextView);
 
         Glide.with(this)
                 .load(carImageUrl)
@@ -44,6 +47,6 @@ public class CarDetailActivity extends AppCompatActivity {
         carDetailBrandTextView.setText(carBrand);
         carDetailModelTextView.setText(carModel);
         carDetailDescriptionTextView.setText(carDescription);
-
+        carDetailPriceTextView.setText("$" + carPricePerDay + "/day" + " or $" + carPricePerHour + "/hour");
     }
 }

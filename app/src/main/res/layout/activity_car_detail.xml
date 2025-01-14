@@ -41,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="@color/wheat"
-                android:src="@drawable/ic_car"
                 android:scaleType="centerCrop"
+                android:src="@drawable/ic_car"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -191,13 +191,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rentDateToLabel" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total: $250"
+                    android:textSize="18sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/carDetailAddToBookingButton" />
+
                 <Button
                     android:id="@+id/carDetailAddToBookingButton"
                     style="@style/OnyxButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Rent now for $250"
+                    android:text="Rent now"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/carDetailRentToEditText" />
