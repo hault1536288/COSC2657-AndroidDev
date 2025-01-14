@@ -40,6 +40,12 @@ public class BookingFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        fetchBookingData(); // Refresh data when fragment becomes visible again
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_booking, container, false);
         // Initialize the RecyclerViews

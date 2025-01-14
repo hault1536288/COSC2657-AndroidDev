@@ -47,7 +47,9 @@ public class BookingRecyclerViewAdapter extends RecyclerView.Adapter<BookingRecy
         holder.hotelNameTextView.setText(booking.getHotelName());
         holder.locationTextView.setText(booking.getLocationRange());
         holder.carInfoTextView.setText(booking.getCarName());
-        holder.totalAmountTextView.setText("$" + String.valueOf(booking.getTotalAmount()));
+        holder.totalAmountTextView.setText("Total: $" + String.valueOf(booking.getTotalAmount()));
+        holder.statusTextView.setText(booking.getStatus());
+
         // change color based on status
         if ("pending".equalsIgnoreCase(booking.getStatus())) {
             holder.statusTextView.setTextColor(context.getResources().getColor(R.color.gray));

@@ -1,10 +1,12 @@
 package com.example.easybooking.activities;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.easybooking.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BookingDetailActivity extends AppCompatActivity {
     private TextView headerTextView, bookingIdTextView, bookingStatusTextView;
@@ -98,6 +101,8 @@ public class BookingDetailActivity extends AppCompatActivity {
             checkoutButton.setVisibility(View.GONE);
         }
 
+        checkoutButton.setOnClickListener(v -> showCheckoutConfirmationDialog(totalAmount, bookingId));
+
         // Change text color based on booking status
         if ("success".equalsIgnoreCase(bookingStatus)) {
             bookingStatusTextView.setTextColor(getResources().getColor(R.color.green));
@@ -146,4 +151,50 @@ public class BookingDetailActivity extends AppCompatActivity {
             carDetailsLayout.setVisibility(View.GONE);
         }
     }
+
+    private void showCheckoutConfirmationDialog(double totalAmount, String bookingId) {
+        // Create and show a confirmation dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Payment");
+        builder.setMessage("Are you sure you want to finish payment with the amount: $" +
+                String.format("%.2f", totalAmount) +
+                "? Please ensure all booking details are correct.");
+
+        builder.setNegativeButton("Back", (dialog, which) -> dialog.dismiss());
+        builder.setPositiveButton("Confirm", (dialog, which) -> {
+            // Update booking status to "success" in Firebase
+            updateBookingStatus(bookingId, "success");
+        });
+
+        // Show the dialog
+        builder.create().show();
+    }
+
+    private void updateBookingStatus(String bookingId, String status) {
+        if (bookingId == null || bookingId.isEmpty()) {
+            return;
+        }
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        firestore.collection("bookings").document(bookingId)
+                .update(
+                        "status", status,
+                        "isCurrent", false
+                )
+                .addOnSuccessListener(aVoid -> {
+                    // Booking status updated successfully
+                    showToast("Payment completed successfully!");
+                    finish(); // Close the current activity
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
+                    showToast("Failed to update booking status. Please try again.");
+                });
+    }
+
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
 }
