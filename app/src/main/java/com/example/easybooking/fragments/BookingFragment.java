@@ -31,6 +31,7 @@ public class BookingFragment extends Fragment {
         RecyclerView currentBookingRecyclerView = view.findViewById(R.id.currentBookingRecyclerView);
         RecyclerView historyRecyclerView = view.findViewById(R.id.historyRecyclerView);
 
+        // Setting layout managers
         currentBookingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         historyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -38,17 +39,28 @@ public class BookingFragment extends Fragment {
         List<Booking> currentBookings = new ArrayList<>();
         currentBookings.add(new Booking("#123456", "11/20/2024 → 11/23/2024", "Hotel Name 2", "Location A → Location B", "N/A", "$450 USD", "Pending", true));
 
-        // Sample data for history
+        // Sample data for history bookings
         List<Booking> historyBookings = new ArrayList<>();
         historyBookings.add(new Booking("#123457", "11/25/2024 → 11/28/2024", "Hotel Name 3", "Location C → Location D", "Car Name", "$350 USD", "Success", false));
         historyBookings.add(new Booking("#123458", "10/20/2024 → 10/23/2024", "Hotel Name 4", "Location E → Location F", null, "$500 USD", "Success", false));
 
-        BookingAdapter currentAdapter = new BookingAdapter(currentBookings, getContext());
-        BookingAdapter historyAdapter = new BookingAdapter(historyBookings, getContext());
+        // Creating adapters for current and history bookings
+        BookingAdapter currentAdapter = new BookingAdapter(currentBookings, this);
+        BookingAdapter historyAdapter = new BookingAdapter(historyBookings, this);
 
+        // Setting adapters to RecyclerViews
         currentBookingRecyclerView.setAdapter(currentAdapter);
         historyRecyclerView.setAdapter(historyAdapter);
 
         return view;
+    }
+
+    // Method to navigate to CheckoutFragment
+    public void navigateToCheckoutFragment() {
+        getParentFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new CheckoutFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }

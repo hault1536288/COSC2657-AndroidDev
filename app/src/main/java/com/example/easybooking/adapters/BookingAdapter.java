@@ -1,30 +1,28 @@
 package com.example.easybooking.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.easybooking.R;
+import com.example.easybooking.fragments.BookingFragment;
 import com.example.easybooking.models.Booking;
 
 import java.util.List;
 
 public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingViewHolder> {
 
-    private final List<Booking> bookings;
-    private final Context context;
+    private final List<Booking> bookingList;
+    private final BookingFragment fragment;
 
-    // Constructor to pass the data and context
-    public BookingAdapter(List<Booking> bookings, Context context) {
-        this.bookings = bookings;
-        this.context = context;
+    public BookingAdapter(List<Booking> bookingList, BookingFragment fragment) {
+        this.bookingList = bookingList;
+        this.fragment = fragment;
     }
 
     @NonNull
@@ -36,36 +34,23 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
     @Override
     public void onBindViewHolder(@NonNull BookingViewHolder holder, int position) {
-        Booking booking = bookings.get(position);
+        Booking booking = bookingList.get(position);
 
-        // Set data to the views
-        holder.bookingIdTextView.setText("Booking ID: " + booking.getBookingId());
+        // Set booking details
+        holder.bookingIdTextView.setText(booking.getBookingId());
         holder.dateRangeTextView.setText(booking.getDateRange());
         holder.hotelNameTextView.setText(booking.getHotelName());
         holder.locationTextView.setText(booking.getLocation());
-        holder.carInfoTextView.setText(booking.getCarInfo() != null ? booking.getCarInfo() : "N/A");
         holder.totalAmountTextView.setText("Total: " + booking.getTotalAmount());
         holder.statusTextView.setText(booking.getStatus());
 
-        // Set status color
-        if (booking.getStatus().equalsIgnoreCase("Pending")) {
-            holder.statusTextView.setTextColor(context.getResources().getColor(R.color.red));
-        } else {
-            holder.statusTextView.setTextColor(context.getResources().getColor(R.color.green));
-        }
-
-        // Show buttons only for Current Bookings
+        // Show or hide buttons based on booking status
         if (booking.isCurrentBooking()) {
             holder.buttonLayout.setVisibility(View.VISIBLE);
 
-            holder.cancelButton.setOnClickListener(v -> {
-                Toast.makeText(context, "Booking " + booking.getBookingId() + " Cancelled", Toast.LENGTH_SHORT).show();
-                // Implement your cancellation logic here
-            });
-
+            // Handle "Go to Checkout" button click
             holder.checkoutButton.setOnClickListener(v -> {
-                Toast.makeText(context, "Go to Checkout for " + booking.getBookingId(), Toast.LENGTH_SHORT).show();
-                // Implement your checkout logic here
+                fragment.navigateToCheckoutFragment();
             });
         } else {
             holder.buttonLayout.setVisibility(View.GONE);
@@ -74,37 +59,25 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.BookingV
 
     @Override
     public int getItemCount() {
-        return bookings.size();
+        return bookingList.size();
     }
 
-    // ViewHolder class
     public static class BookingViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView bookingIdTextView;
-        private final TextView dateRangeTextView;
-        private final TextView hotelNameTextView;
-        private final TextView locationTextView;
-        private final TextView carInfoTextView;
-        private final TextView totalAmountTextView;
-        private final TextView statusTextView;
-        private final View buttonLayout;
-        private final Button cancelButton;
-        private final Button checkoutButton;
+        TextView bookingIdTextView, dateRangeTextView, hotelNameTextView, locationTextView, totalAmountTextView, statusTextView;
+        Button cancelButton, checkoutButton;
+        View buttonLayout;
 
         public BookingViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            // Initialize the views
             bookingIdTextView = itemView.findViewById(R.id.bookingIdTextView);
             dateRangeTextView = itemView.findViewById(R.id.dateRangeTextView);
             hotelNameTextView = itemView.findViewById(R.id.hotelNameTextView);
             locationTextView = itemView.findViewById(R.id.locationTextView);
-            carInfoTextView = itemView.findViewById(R.id.carInfoTextView);
             totalAmountTextView = itemView.findViewById(R.id.totalAmountTextView);
             statusTextView = itemView.findViewById(R.id.statusTextView);
-            buttonLayout = itemView.findViewById(R.id.buttonLayout);
             cancelButton = itemView.findViewById(R.id.cancelButton);
-            checkoutButton = itemView.findViewById(R.id.checkoutButton);
+            checkoutButton = itemView.findViewById(R.id.goToCheckoutButton);
+            buttonLayout = itemView.findViewById(R.id.buttonLayout);
         }
     }
 }

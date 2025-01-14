@@ -17,7 +17,6 @@ import com.example.easybooking.R;
 public class ChangePasswordFragment extends Fragment {
 
     private EditText currentPasswordEditText, newPasswordEditText;
-    private Button savePasswordButton;
 
     public ChangePasswordFragment() {
         // Required empty public constructor
@@ -30,7 +29,7 @@ public class ChangePasswordFragment extends Fragment {
         // Initialize UI components
         currentPasswordEditText = view.findViewById(R.id.currentPasswordEditText);
         newPasswordEditText = view.findViewById(R.id.newPasswordEditText);
-        savePasswordButton = view.findViewById(R.id.savePasswordButton);
+        Button savePasswordButton = view.findViewById(R.id.savePasswordButton);
 
         // Handle Save Password button click
         savePasswordButton.setOnClickListener(v -> {

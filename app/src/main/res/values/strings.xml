@@ -42,6 +42,9 @@
     <string name="location_icon">Location Icon</string>
     <string name="car_icon">Car Icon</string>
     <string name="not_available">N/A</string>
+    <string name="checkout_details">Checkout Details</string>
+    <string name="back">Back</string>
+    <string name="confirm">Confirm</string>
 
 
 

@@ -2,7 +2,6 @@ package com.example.easybooking;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,11 +17,9 @@ import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
@@ -30,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+
             if (itemId == R.id.hotel) {
                 replaceFragment(new HotelFragment());
             } else if (itemId == R.id.car) {
@@ -43,13 +41,17 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-        replaceFragment(new HotelFragment()); // Set initial fragment to Hotel
+
+        // Set initial fragment to BookingFragment
+        replaceFragment(new BookingFragment());
     }
 
     private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
 }

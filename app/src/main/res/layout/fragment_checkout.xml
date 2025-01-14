@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Booking Details -->
+    <TextView
+        android:id="@+id/checkoutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkout_details"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Date Range -->
+    <TextView
+        android:id="@+id/checkoutDateRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="11/20/2024 → 11/23/2024"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Booking ID -->
+    <TextView
+        android:id="@+id/checkoutBookingId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Booking ID: #123456"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Hotel Service Price -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hotel Service:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/checkoutHotelPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$250"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- Transport Service Price -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Transport Service:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/checkoutTransportPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$200"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <!-- Total Amount -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/checkoutTotalAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$450 USD"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp">
+
+        <Button
+            android:id="@+id/checkoutBackButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/red"
+            android:text="Back"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/checkoutConfirmButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:backgroundTint="@color/primary"
+            android:text="Confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>
