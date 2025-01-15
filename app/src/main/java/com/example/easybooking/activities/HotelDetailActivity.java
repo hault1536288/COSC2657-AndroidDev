@@ -197,8 +197,15 @@ public class HotelDetailActivity extends AppCompatActivity {
     }
 
     private void addToBooking() {
+        String currentUserId = auth.getCurrentUser() != null ? auth.getCurrentUser().getUid() : null;
+        if (currentUserId == null) {
+            Toast.makeText(this, "User is not logged in.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         db.collection("bookings")
                 .whereEqualTo("isCurrent", true)
+                .whereEqualTo("userId", currentUserId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     boolean bookingExists = false;

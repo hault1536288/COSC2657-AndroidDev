@@ -56,6 +56,7 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
             Intent intent = new Intent(context, CarDetailActivity.class);
 
             // Pass data to the CarDetailActivity
+            intent.putExtra("CAR_ID", carArrayList.get(position).getCarId());
             intent.putExtra("CAR_IMAGE_URL", carArrayList.get(position).getCarImageUrl());
             intent.putExtra("CAR_NAME", carArrayList.get(position).getName());
             intent.putExtra("CAR_BRAND", carArrayList.get(position).getBrand());
