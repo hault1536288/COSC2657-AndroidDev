@@ -108,6 +108,11 @@ public class HotelFragment extends Fragment implements RecyclerViewInterface {
         // Get the selected hotel
         Hotel selectedHotel = hotelArrayList.get(position);
         // Pass the selected hotel to the HotelDetailActivity
+        intent.putExtra("HOTEL_ID", selectedHotel.getHotelId());
+        intent.putExtra("HOTEL_PRICE_PER_NIGHT", selectedHotel.getPricePerNight());
+        intent.putExtra("HOTEL_PRICE_PER_HOUR", selectedHotel.getPricePerHour());
+
+        // Viewable hotel data in layout
         intent.putExtra("HOTEL_IMAGE_URL", selectedHotel.getImageUrl());
         intent.putExtra("HOTEL_NAME", selectedHotel.getHotelName());
         intent.putExtra("HOTEL_DESCRIPTION", selectedHotel.getDescription());

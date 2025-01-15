@@ -176,16 +176,32 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/hotelDetailCheckOutEditText">
 
-                    <TextView
-                        android:id="@+id/hotelDetailTotalPrice"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Total: $200"
-                        android:visibility="invisible"
-                        android:textSize="20sp" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/hotelDetailTotalPrice"
+                            android:textColor="@color/green"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total: $200"
+                            android:visibility="invisible"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/hotelDetailTotalCalculation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="..."
+                            android:visibility="invisible"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
                     <Button
+                        android:id="@+id/addToBookingButton"
                         style="@style/OnyxButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

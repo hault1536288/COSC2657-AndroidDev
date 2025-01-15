@@ -63,7 +63,7 @@
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="Location Icon"
-            android:src="@drawable/ic_location" />
+            android:src="@drawable/ic_transport" />
 
         <TextView
             android:id="@+id/locationTextView"

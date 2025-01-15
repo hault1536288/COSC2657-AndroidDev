@@ -47,9 +47,15 @@ public class BookingRecyclerViewAdapter extends RecyclerView.Adapter<BookingRecy
         Booking booking = bookingArrayList.get(position);
         holder.dateRangeTextView.setText(booking.getDateRange());
         holder.bookingIdTextView.setText("Booking ID: " + booking.getBookingId());
-        holder.hotelNameTextView.setText(booking.getHotelName());
+
+        String hotelName = booking.getHotelName();
+        holder.hotelNameTextView.setText(hotelName != null ? hotelName : "N/A");
+
         holder.locationTextView.setText(booking.getLocationRange());
-        holder.carInfoTextView.setText(booking.getCarName());
+
+        String carName = booking.getCarName();
+        holder.carInfoTextView.setText(carName != null ? carName : "N/A");
+
         holder.totalAmountTextView.setText("Total: $" + String.valueOf(booking.getTotalAmount()));
         holder.statusTextView.setText(booking.getStatus());
 
