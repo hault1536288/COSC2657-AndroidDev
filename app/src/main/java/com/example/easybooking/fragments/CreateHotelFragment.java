@@ -38,6 +38,7 @@ import android.app.AlertDialog;
 import com.cloudinary.android.MediaManager;
 import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
+import android.util.Log;
 
 public class CreateHotelFragment extends Fragment {
     private Uri imageUri;
@@ -112,7 +113,8 @@ public class CreateHotelFragment extends Fragment {
             config.put("api_secret", getString(R.string.cloudinary_api_secret));
             MediaManager.init(requireContext(), config);
         } catch (IllegalStateException e) {
-            showToast("Error initializing Cloudinary: " + e.getMessage());
+            // Log the error but don't show it to the user since it's not critical
+            Log.d("Cloudinary", "MediaManager already initialized");
         }
     }
 
