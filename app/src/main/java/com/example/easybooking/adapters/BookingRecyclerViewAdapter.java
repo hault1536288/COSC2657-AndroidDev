@@ -1,5 +1,6 @@
 package com.example.easybooking.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,7 @@ import com.example.easybooking.R;
 import com.example.easybooking.activities.BookingDetailActivity;
 import com.example.easybooking.activities.CarDetailActivity;
 import com.example.easybooking.models.Booking;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +72,29 @@ public class BookingRecyclerViewAdapter extends RecyclerView.Adapter<BookingRecy
 
         // Set up button click listener
         holder.cancelButton.setOnClickListener(v -> {
-            // Handle cancel button click
+            // Show confirmation dialog
+            new AlertDialog.Builder(context)
+                    .setTitle("Cancel Booking")
+                    .setMessage("Are you sure you want to cancel this booking?")
+                    .setPositiveButton("Confirm", (dialog, which) -> {
+                        // Update Firestore
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        db.collection("bookings")
+                                .document(booking.getBookingId())
+                                .update("status", "cancelled",
+                                        "isCurrent", false)
+                                .addOnSuccessListener(aVoid -> {
+                                    // Update UI
+                                    booking.setStatus("cancelled");
+                                    notifyItemChanged(holder.getAdapterPosition());
+                                    Toast.makeText(context, "Booking cancelled successfully.", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(context, "Failed to cancel booking: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                });
+                    })
+                    .setNegativeButton("Back", null)
+                    .show();
         });
         holder.checkoutButton.setOnClickListener(v -> {
             Intent intent = new Intent(context, BookingDetailActivity.class);
