@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,47 +9,176 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/onyx"
             android:orientation="vertical"
-            android:paddingHorizontal="40dp"
-            android:paddingTop="40dp"
-            android:paddingBottom="20dp">
+            android:background="@drawable/rounded_search_box">
 
-            <SearchView
+            <LinearLayout
+                android:id="@+id/searchPanelContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bordered_search_view"
-                android:queryHint="Search for cars" />
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Brand -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Brand"
+                    android:textColor="@color/wheat" />
+
+                <EditText
+                    android:id="@+id/brandEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/bordered_input_field"
+                    android:hint="Enter brand name" />
+
+                <!-- Model -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Model"
+                    android:textColor="@color/wheat" />
+
+                <EditText
+                    android:id="@+id/modelEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/bordered_input_field"
+                    android:hint="Enter model name" />
+
+                <!-- Car Name -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Car Name"
+                    android:textColor="@color/wheat" />
+
+                <EditText
+                    android:id="@+id/carNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/bordered_input_field"
+                    android:hint="Enter car name" />
+
+                <!-- Price Per Day Range -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price Range Per Day"
+                    android:textColor="@color/wheat" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/minPricePerDayEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordered_input_field"
+                        android:hint="Min"
+                        android:inputType="numberDecimal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="-"
+                        android:textColor="@color/wheat" />
+
+                    <EditText
+                        android:id="@+id/maxPricePerDayEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordered_input_field"
+                        android:hint="Max"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <!-- Price Per Hour Range -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price Range Per Hour"
+                    android:textColor="@color/wheat" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/minPricePerHourEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordered_input_field"
+                        android:hint="Min"
+                        android:inputType="numberDecimal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="-"
+                        android:textColor="@color/wheat" />
+
+                    <EditText
+                        android:id="@+id/maxPricePerHourEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bordered_input_field"
+                        android:hint="Max"
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/searchButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/wheat"
+                    android:text="Search"
+                    android:textColor="@color/onyx"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="8dp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/toggleSearchButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:background="@null"
+                android:src="@drawable/ic_arrow_up"
+                android:contentDescription="Toggle search panel" />
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/carsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical"
-            android:paddingHorizontal="40dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="Available cars"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/carsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_marginTop="20dp" />
     </LinearLayout>
-
-
 </FrameLayout>
