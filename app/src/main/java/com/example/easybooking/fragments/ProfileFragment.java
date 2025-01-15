@@ -1,5 +1,6 @@
 package com.example.easybooking.fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,11 +23,13 @@ import com.example.easybooking.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
+
 public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
-    private EditText firstNameEditText, lastNameEditText, phoneEditText;
-    private ImageView firstNameEditButton, lastNameEditButton, phoneEditButton;
+    private EditText usernameEditText, firstNameEditText, lastNameEditText, phoneEditText, dobEditText;
+    private ImageView usernameEditButton, firstNameEditButton, lastNameEditButton, phoneEditButton, dobEditButton;
     private TextView usernameTextView;
     private User currentUser;
 
@@ -37,6 +40,8 @@ public class ProfileFragment extends Fragment {
         firestore = FirebaseFirestore.getInstance();
 
         // Initialize UI components
+        usernameEditText = view.findViewById(R.id.usernameEditText);
+        usernameEditButton = view.findViewById(R.id.usernameEditButton);
         firstNameEditText = view.findViewById(R.id.firstNameEditText);
         lastNameEditText = view.findViewById(R.id.lastNameEditText);
         phoneEditText = view.findViewById(R.id.phoneEditText);
@@ -44,17 +49,23 @@ public class ProfileFragment extends Fragment {
         lastNameEditButton = view.findViewById(R.id.lastNameEditButton);
         phoneEditButton = view.findViewById(R.id.phoneEditButton);
         usernameTextView = view.findViewById(R.id.profileNameTextView);
+        dobEditText = view.findViewById(R.id.dobEditText);
+        dobEditButton = view.findViewById(R.id.dobEditButton);
         TextView changePasswordTextView = view.findViewById(R.id.changePasswordTextView);
         Button logoutButton = view.findViewById(R.id.logoutButton);
 
-        // Handle First Name edit button click
+        // Handle edit buttons
+        usernameEditButton.setOnClickListener(v -> toggleEditMode(usernameEditText, usernameEditButton, "username"));
         firstNameEditButton.setOnClickListener(v -> toggleEditMode(firstNameEditText, firstNameEditButton, "firstName"));
-
-        // Handle Last Name edit button click
         lastNameEditButton.setOnClickListener(v -> toggleEditMode(lastNameEditText, lastNameEditButton, "lastName"));
-
-        // Handle Phone edit button click
         phoneEditButton.setOnClickListener(v -> toggleEditMode(phoneEditText, phoneEditButton, "phone"));
+        dobEditButton.setOnClickListener(v -> toggleEditMode(dobEditText, dobEditButton, "dob"));
+
+        dobEditText.setFocusable(false);
+        dobEditText.setClickable(true);
+        dobEditText.setOnClickListener(v -> {
+            showDatePickerDialog();
+        });
 
         // Handle Change Password click
         changePasswordTextView.setOnClickListener(v -> {
@@ -94,11 +105,12 @@ public class ProfileFragment extends Fragment {
                         currentUser = documentSnapshot.toObject(User.class);
 
                         if (currentUser != null) {
-                            // Set username, first name, last name, and phone
-                            usernameTextView.setText(currentUser.getUsername());
+                            usernameTextView.setText(currentUser.getEmail());
+                            usernameEditText.setText(currentUser.getUsername());
                             firstNameEditText.setText(currentUser.getFirstName());
                             lastNameEditText.setText(currentUser.getLastName());
                             phoneEditText.setText(currentUser.getPhone());
+                            dobEditText.setText(currentUser.getDateOfBirth());
                         }
                     } else {
                         Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
@@ -109,16 +121,31 @@ public class ProfileFragment extends Fragment {
                 });
     }
 
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                requireContext(),
+                (view, year, month, dayOfMonth) -> {
+                    String formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
+                    dobEditText.setText(formattedDate);
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePickerDialog.show();
+    }
+
     // Function to toggle edit mode
     private void toggleEditMode(EditText editText, ImageView editButton, String field) {
         if (editText.isEnabled()) {
             // Get the new value entered by the user
             String newValue = editText.getText().toString().trim();
 
-            // Check if the input is empty
             if (newValue.isEmpty()) {
                 Toast.makeText(getContext(), "Field cannot be empty", Toast.LENGTH_SHORT).show();
-                return; // Do not save if the field is empty
+                return;
             }
 
             // Save the new value to Firestore
@@ -128,6 +155,10 @@ public class ProfileFragment extends Fragment {
                 currentUser.setLastName(newValue);
             } else if (field.equals("phone")) {
                 currentUser.setPhone(newValue);
+            } else if (field.equals("dob")) {
+                currentUser.setDateOfBirth(newValue);
+            } else if (field.equals("username")) {
+                currentUser.setUsername(newValue);
             }
 
             // Update the Firestore document with new values
