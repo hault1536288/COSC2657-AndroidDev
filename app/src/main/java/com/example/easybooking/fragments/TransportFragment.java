@@ -110,9 +110,11 @@ public class TransportFragment extends Fragment implements RecyclerViewInterface
         intent.putExtra("TRANSPORT_TYPE", selectedTransport.getType());
         intent.putExtra("BRAND", selectedTransport.getBrand());
         intent.putExtra("DEPARTURE_LOCATION", selectedTransport.getDepartureLocation());
+        intent.putExtra("DEPARTURE_DATETIME", selectedTransport.getDepartureDate());
         intent.putExtra("DEPARTURE_TIME", departureTime);
         intent.putExtra("DEPARTURE_DATE", departureDate);
         intent.putExtra("ARRIVAL_LOCATION", selectedTransport.getArrivalLocation());
+        intent.putExtra("ARRIVAL_DATETIME", selectedTransport.getArrivalDate());
         intent.putExtra("ARRIVAL_TIME", arrivalTime);
         intent.putExtra("ARRIVAL_DATE", arrivalDate);
         intent.putExtra("PRICE", selectedTransport.getPrice());
