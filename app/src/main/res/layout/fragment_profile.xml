@@ -217,6 +217,26 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/log_out" />
 
+            <!-- View User Layout Button -->
+            <Button
+                android:id="@+id/viewUserLayoutButton"
+                style="@style/OnyxButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="View User Layout" />
+
+            <!-- Back to Admin Button -->
+            <Button
+                android:id="@+id/backToAdminButton"
+                style="@style/OnyxButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:text="Back to Admin" />
+
         </LinearLayout>
     </ScrollView>
 

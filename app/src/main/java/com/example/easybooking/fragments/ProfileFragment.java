@@ -3,6 +3,7 @@ package com.example.easybooking.fragments;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.easybooking.AdminActivity;
 import com.example.easybooking.R;
+import com.example.easybooking.ViewUserActivity;
 import com.example.easybooking.activities.LoginActivity;
 import com.example.easybooking.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
@@ -32,6 +36,8 @@ public class ProfileFragment extends Fragment {
     private ImageView usernameEditButton, firstNameEditButton, lastNameEditButton, phoneEditButton, dobEditButton;
     private TextView usernameTextView;
     private User currentUser;
+    private Button viewUserLayoutButton;
+    private Button backToAdminButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +60,14 @@ public class ProfileFragment extends Fragment {
         TextView changePasswordTextView = view.findViewById(R.id.changePasswordTextView);
         Button logoutButton = view.findViewById(R.id.logoutButton);
 
+        // Initialize the admin buttons
+        viewUserLayoutButton = view.findViewById(R.id.viewUserLayoutButton);
+        backToAdminButton = view.findViewById(R.id.backToAdminButton);
+
+        // Hide buttons by default
+        viewUserLayoutButton.setVisibility(View.GONE);
+        backToAdminButton.setVisibility(View.GONE);
+
         // Handle edit buttons
         usernameEditButton.setOnClickListener(v -> toggleEditMode(usernameEditText, usernameEditButton, "username"));
         firstNameEditButton.setOnClickListener(v -> toggleEditMode(firstNameEditText, firstNameEditButton, "firstName"));
@@ -63,38 +77,30 @@ public class ProfileFragment extends Fragment {
 
         dobEditText.setFocusable(false);
         dobEditText.setClickable(true);
-        dobEditText.setOnClickListener(v -> {
-            showDatePickerDialog();
-        });
+        dobEditText.setOnClickListener(this::showDatePickerDialog);
 
         // Handle Change Password click
-        changePasswordTextView.setOnClickListener(v -> {
-            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, new ChangePasswordFragment());
-            transaction.addToBackStack(null);
-            transaction.commit();
-        });
+        changePasswordTextView.setOnClickListener(this::handleChangePassword);
 
         // Handle logout button click
-        logoutButton.setOnClickListener(v -> {
-            // Sign out the user
-            mAuth.signOut();
-            Toast.makeText(getContext(), "Logged out", Toast.LENGTH_SHORT).show();
-            // Navigate to LoginActivity
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            getActivity().finish();
-        });
+        logoutButton.setOnClickListener(this::handleLogout);
 
         // Load user profile data
         loadUserProfile();
 
+        viewUserLayoutButton.setOnClickListener(this::handleViewUserLayout);
+        backToAdminButton.setOnClickListener(this::handleBackToAdmin);
+
         return view;
     }
 
-    // Function to load user profile data from Firestore
+    // Function to load user profile data from FireStore
     private void loadUserProfile() {
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getContext(), "No user logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
         String userId = mAuth.getCurrentUser().getUid();
 
         firestore.collection("users")
@@ -111,22 +117,36 @@ public class ProfileFragment extends Fragment {
                             lastNameEditText.setText(currentUser.getLastName());
                             phoneEditText.setText(currentUser.getPhone());
                             dobEditText.setText(currentUser.getDateOfBirth());
+
+                            // Check user role and show/hide admin buttons
+                            String userRole = currentUser.getRole();
+                            if (userRole != null && userRole.equals("admin")) {
+                                viewUserLayoutButton.setVisibility(View.VISIBLE);
+                                backToAdminButton.setVisibility(View.VISIBLE);
+                            } else {
+                                viewUserLayoutButton.setVisibility(View.GONE);
+                                backToAdminButton.setVisibility(View.GONE);
+                            }
                         }
                     } else {
                         Toast.makeText(getContext(), "User data not found", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(getContext(), "Failed to load user profile", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(this::handleProfileLoadFailure);
     }
 
-    private void showDatePickerDialog() {
+    // Add this new method to handle the failure
+    private void handleProfileLoadFailure(Exception e) {
+        Toast.makeText(getContext(), "Failed to load user profile", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showDatePickerDialog(View v) {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 requireContext(),
                 (view, year, month, dayOfMonth) -> {
-                    String formattedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
+                    String formattedDate = String.format(Locale.getDefault(), "%02d/%02d/%04d", 
+                        dayOfMonth, month + 1, year);
                     dobEditText.setText(formattedDate);
                 },
                 calendar.get(Calendar.YEAR),
@@ -140,7 +160,6 @@ public class ProfileFragment extends Fragment {
     // Function to toggle edit mode
     private void toggleEditMode(EditText editText, ImageView editButton, String field) {
         if (editText.isEnabled()) {
-            // Get the new value entered by the user
             String newValue = editText.getText().toString().trim();
 
             if (newValue.isEmpty()) {
@@ -148,37 +167,91 @@ public class ProfileFragment extends Fragment {
                 return;
             }
 
-            // Save the new value to Firestore
-            if (field.equals("firstName")) {
-                currentUser.setFirstName(newValue);
-            } else if (field.equals("lastName")) {
-                currentUser.setLastName(newValue);
-            } else if (field.equals("phone")) {
-                currentUser.setPhone(newValue);
-            } else if (field.equals("dob")) {
-                currentUser.setDateOfBirth(newValue);
-            } else if (field.equals("username")) {
-                currentUser.setUsername(newValue);
+            switch (field) {
+                case "firstName":
+                    currentUser.setFirstName(newValue);
+                    break;
+                case "lastName":
+                    currentUser.setLastName(newValue);
+                    break;
+                case "phone":
+                    currentUser.setPhone(newValue);
+                    break;
+                case "dob":
+                    currentUser.setDateOfBirth(newValue);
+                    break;
+                case "username":
+                    currentUser.setUsername(newValue);
+                    break;
             }
 
-            // Update the Firestore document with new values
-            firestore.collection("users")
-                    .document(mAuth.getCurrentUser().getUid())
-                    .set(currentUser)
-                    .addOnSuccessListener(aVoid -> {
-                        // Disable the EditText after saving the changes
-                        editText.setEnabled(false);
-                        editButton.setImageResource(R.drawable.ic_edit); // Change icon back to Edit
-                        Toast.makeText(getContext(), "Information saved", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(getContext(), "Failed to save information", Toast.LENGTH_SHORT).show();
-                    });
+            // Update FireStore
+            if (mAuth.getCurrentUser() != null) {
+                firestore.collection("users")
+                        .document(mAuth.getCurrentUser().getUid())
+                        .set(currentUser)
+                        .addOnSuccessListener(aVoid -> {
+                            editText.setEnabled(false);
+                            editButton.setImageResource(R.drawable.ic_edit);
+                            Toast.makeText(getContext(), "Information saved", Toast.LENGTH_SHORT).show();
+                        })
+                        .addOnFailureListener(e -> 
+                            Toast.makeText(getContext(), "Failed to save information", Toast.LENGTH_SHORT).show()
+                        );
+            }
         } else {
-            // Enable the EditText for editing
             editText.setEnabled(true);
-            editButton.setImageResource(R.drawable.ic_save); // Change icon to Save
+            editButton.setImageResource(R.drawable.ic_save);
         }
+    }
+
+    private void handleViewUserLayout(View v) {
+        try {
+            // Navigate to ViewUserActivity
+            Intent intent = new Intent(getActivity(), ViewUserActivity.class);
+            startActivity(intent);
+        } catch (Exception e) {
+            // Log the error
+            Log.e("ProfileFragment", "Error navigating to ViewUserActivity: " + e.getMessage());
+            // Show error message to user
+            Toast.makeText(getContext(), 
+                "Failed to open user view: " + e.getMessage(), 
+                Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleBackToAdmin(View v) {
+        try {
+            // Navigate to AdminActivity
+            Intent intent = new Intent(getActivity(), AdminActivity.class);
+            startActivity(intent);
+            requireActivity().finish(); // Close the current activity
+        } catch (Exception e) {
+            // Log the error
+            Log.e("ProfileFragment", "Error navigating to AdminActivity: " + e.getMessage());
+            // Show error message to user
+            Toast.makeText(getContext(), 
+                "Failed to return to admin: " + e.getMessage(), 
+                Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleLogout(View v) {
+        // Sign out the user
+        mAuth.signOut();
+        Toast.makeText(getContext(), "Logged out", Toast.LENGTH_SHORT).show();
+        // Navigate to LoginActivity
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        requireActivity().finish();
+    }
+
+    private void handleChangePassword(View v) {
+        FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, new ChangePasswordFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

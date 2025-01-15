@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/hotel2"
+        android:enabled="true"
+        android:icon="@drawable/ic_hotel"
+        android:title="@string/nav_hotel_label"/>
+    <item
+        android:id="@+id/car2"
+        android:enabled="true"
+        android:icon="@drawable/ic_car"
+        android:title="@string/nav_car_label"/>
+    <item
+        android:id="@+id/transport2"
+        android:enabled="true"
+        android:icon="@drawable/ic_transport"
+        android:title="@string/nav_transport_label"/>
+    <item
+        android:id="@+id/profile2"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/nav_profile_label"/>
 </menu>
